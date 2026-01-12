@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinidad Diez - Retro OS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="bsod" onclick="reboot()">
+        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+        <br>
+        <p>* Press any key to terminate the current application.</p>
+        <p>* Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.</p>
+        <br>
+        <p style="text-align: center;">Press any key to continue <span class="blink">_</span></p>
+    </div>
+
+    <div class="desktop" id="desktop-bg" onclick="handleDesktopClick()">
+        
+        <div class="desktop-icon" onclick="openWindow('win-about', 'About Me', 'computer_explorer-0.png')">
+            <div class="icon-box icon-computer"></div>
+            <span>My Computer<br>(About Me)</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m04', 'M04 JS HTML', 'directory_open_file_mydocs-0.png')">
+            <div class="icon-box icon-folder"></div>
+            <span>M04</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m09-1', 'M09 Basics', 'notepad-0.png')">
+            <div class="icon-box icon-file"></div>
+            <span>M09<br>Basics.js</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m09-2', 'M09 Functional', 'notepad-0.png')">
+            <div class="icon-box icon-file"></div>
+            <span>M09<br>Func.js</span>
+        </div>
+
+    </div>
+
+    <div id="win-about" class="window win98-border" style="top: 10%; left: 10%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-about')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" style="width:16px;">
+                About Me
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="closeWindow('win-about')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>About Me</h2>
+                <p><strong>System:</strong> IciaFPInf v1.0</p>
+                <p><strong>User:</strong> Trinidad Diez</p>
+                <hr style="border: 0; border-top: 1px dotted #000;">
+                <h3>Collection of notes and practices</h3>
+                <p>Here you will find the exercises completed for modules <strong>M04</strong> and <strong>M09</strong> of the <strong>DAM01</strong> cycle at <strong>ITB</strong>.</p>
+                <p>Professor: Alicia Vázquez</p>
+            </div>
+            <div style="margin-top: 10px; text-align: right;">
+                <button class="win98-btn" onclick="closeWindow('win-about')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-m04" class="window win98-border" style="top: 15%; left: 20%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-m04')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-0.png" style="width:16px;">
+                M04 JS HTML
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="closeWindow('win-m04')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>The DOM & Selectors</h2>
+                <p>Learning to select HTML elements using <code>getElementById</code> and <code>querySelector</code>.</p>
+                <h3>Exercises</h3>
+                <ul>
+                    <li>Exercise 1: Hacker</li>
+                    <li>Previous Exams</li>
+                    <li>Alphanumeric Keyboard</li>
+                </ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <a href="#" class="win98-btn">Notes</a>
+                <a href="#" class="win98-btn">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-m09-1" class="window win98-border" style="top: 20%; left: 30%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-m09-1')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px;">
+                M09 Basics
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="closeWindow('win-m09-1')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>Fundamentals & Modern Syntax</h2>
+                <p>Variables (let, const), Operators, Modals, Control Structures.</p>
+                <h3>Files</h3>
+                <ul>
+                    <li>Example 1.js</li>
+                    <li>Numbers Exercise.js</li>
+                </ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <a href="#" class="win98-btn">Notes</a>
+                <a href="#" class="win98-btn">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-m09-2" class="window win98-border" style="top: 25%; left: 40%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-m09-2')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px;">
+                M09 Functional
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="closeWindow('win-m09-2')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>Functional Programming</h2>
+                <p>Arrow functions, Parameters, Destructuring, and Arrays.</p>
+                <h3>Exercises</h3>
+                <ul><li>Exercise 1.js</li></ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <a href="#" class="win98-btn">Notes</a>
+                <a href="#" class="win98-btn">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="taskbar">
+        <div class="start-btn">
+            <div class="start-icon-img"></div>
+            Start
+        </div>
+        <div class="taskbar-divider"></div>
+        
+        <div class="taskbar-apps" id="taskbar-apps"></div>
+
+        <div class="contact-info">
+            <a href="mailto:trinidadx@proton.me">trinidadx@proton.me</a>
+        </div>
+        
+        <div class="tray">
+            <span xmlns:cc="http://creativecommons.org/ns#">CC BY 4.0</span>
+            <span id="clock" style="margin-left: 10px;">10:19 AM</span>
+        </div>
+    </div>
+
+    <script>
+        // --- CLOCK ---
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- WINDOW & TASKBAR MANAGEMENT ---
+        let zIndexCounter = 100;
+        let openWindows = []; // Array of objects: {id, title, icon}
+
+        function openWindow(id, title, iconName) {
+            const win = document.getElementById(id);
+            
+            // Check if already open
+            if (!openWindows.find(w => w.id === id)) {
+                openWindows.push({id, title, iconName});
+                renderTaskbar();
+            }
+
+            win.style.display = 'block';
+            bringToFront(win);
+        }
+
+        function closeWindow(id) {
+            document.getElementById(id).style.display = 'none';
+            // Remove from active windows array
+            openWindows = openWindows.filter(w => w.id !== id);
+            renderTaskbar();
+        }
+
+        function toggleWindow(id) {
+            const win = document.getElementById(id);
+            const isVisible = win.style.display !== 'none';
+            const isTop = win.style.zIndex == zIndexCounter;
+
+            if (isVisible && isTop) {
+                // Minimize
+                win.style.display = 'none';
+            } else {
+                // Restore or Bring to Front
+                win.style.display = 'block';
+                bringToFront(win);
+            }
+            renderTaskbar(); // To update 'active' styles
+        }
+
+        function bringToFront(element) {
+            zIndexCounter++;
+            element.style.zIndex = zIndexCounter;
+            
+            // Update Title Bar Colors
+            document.querySelectorAll('.title-bar').forEach(tb => {
+                tb.style.background = 'var(--title-bar-bg-inactive)';
+            });
+            element.querySelector('.title-bar').style.background = 'var(--title-bar-bg-active)';
+            
+            renderTaskbar();
+        }
+
+        function renderTaskbar() {
+            const container = document.getElementById('taskbar-apps');
+            container.innerHTML = '';
+
+            openWindows.forEach(w => {
+                const winEl = document.getElementById(w.id);
+                const isTop = winEl.style.zIndex == zIndexCounter && winEl.style.display !== 'none';
+                
+                const btn = document.createElement('div');
+                btn.className = `taskbar-item ${isTop ? 'active' : ''}`;
+                btn.onclick = () => toggleWindow(w.id);
+                
+                const img = document.createElement('img');
+                img.src = `https://win98icons.alexmeub.com/icons/png/${w.iconName}`;
+                
+                const span = document.createElement('span');
+                span.innerText = w.title;
+
+                btn.appendChild(img);
+                btn.appendChild(span);
+                container.appendChild(btn);
+            });
+        }
+
+        // --- DRAGGABLE LOGIC ---
+        let isDragging = false;
+        let currentWindow = null;
+        let offset = { x: 0, y: 0 };
+
+        function startDrag(e, id) {
+            // Prevent dragging if clicking button
+            if(e.target.tagName === 'BUTTON') return;
+
+            isDragging = true;
+            currentWindow = document.getElementById(id);
+            bringToFront(currentWindow);
+            const rect = currentWindow.getBoundingClientRect();
+            offset.x = e.clientX - rect.left;
+            offset.y = e.clientY - rect.top;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !currentWindow) return;
+            currentWindow.style.left = (e.clientX - offset.x) + 'px';
+            currentWindow.style.top = (e.clientY - offset.y) + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            currentWindow = null;
+        });
+        
+        document.querySelectorAll('.window').forEach(win => {
+            win.addEventListener('mousedown', () => bringToFront(win));
+        });
+
+        // --- BSOD EASTER EGG ---
+        let clickCount = 0;
+        let clickTimer;
+
+        function handleDesktopClick() {
+            // If dragging, don't count as click
+            if (isDragging) return;
+            
+            // Check if clicking on an icon (bubbling), we only want background
+            // Actually, CSS handles icon clicks separately, but this catches background.
+            
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            // Reset count if not clicked rapidly
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 800);
+
+            // Trigger BSOD on 3rd rapid click
+            if (clickCount >= 3) {
+                document.getElementById('bsod').style.display = 'block';
+                clickCount = 0;
+            }
+        }
+
+        function reboot() {
+            document.getElementById('bsod').style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>
