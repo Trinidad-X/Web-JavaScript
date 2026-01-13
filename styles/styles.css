@@ -1,17 +1,18 @@
 :root {
-    /* Windows 98 Palette (Purple Edition) */
-    --desktop-bg: #5a2d82; 
+    --desktop-bg: #008080;
     --win-gray: #c0c0c0;
     --win-text: #000000;
     --win-dark: #808080;
     --win-light: #ffffff;
-    --title-bar-bg-active: linear-gradient(90deg, #4b0082, #8e44ad); 
-    --title-bar-bg-inactive: linear-gradient(90deg, #808080, #b0b0b0);
+    --title-bar-bg-active: linear-gradient(90deg, #000080, #1084d0);
+    --title-bar-bg-inactive: #808080;
     --border-light: #dfdfdf;
     --border-dark: #404040;
 }
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -30,7 +31,10 @@ body {
 #bsod {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: #0000AA;
     color: white;
     font-family: 'Courier New', monospace;
@@ -41,8 +45,16 @@ body {
     line-height: 1.5;
     cursor: pointer;
 }
-.blink { animation: blinker 1s linear infinite; }
-@keyframes blinker { 50% { opacity: 0; } }
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
 
 /* --- 98 UTILS --- */
 .win98-border {
@@ -79,14 +91,15 @@ body {
     font-family: 'Tahoma', sans-serif;
 }
 
-.win98-btn:active, .taskbar-item.active {
+.win98-btn:active,
+.taskbar-item.active {
     border-top: 2px solid var(--win-dark);
     border-left: 2px solid var(--win-dark);
     border-right: 2px solid var(--win-light);
     border-bottom: 2px solid var(--win-light);
     box-shadow: none;
-    background: #e0e0e0; /* Dotted pattern check effect usually */
-    transform: translate(0, 0); /* Reset transform, border handles visual shift */
+    background: #e0e0e0;
+    transform: translate(0, 0);
 }
 
 /* --- DESKTOP ICONS --- */
@@ -95,8 +108,10 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
     gap: 30px;
+    height: 80%;
 }
 
 .desktop-icon {
@@ -114,11 +129,12 @@ body {
     padding: 2px;
     font-size: 11px;
     text-shadow: 1px 1px 0 #000;
-    background-color: rgba(0,0,0,0.5); /* Readable against cat meme */
+    background-color: transparent;
+    word-break: break-word;
 }
 
 .desktop-icon:active span {
-    background: #000080; 
+    background: #000080;
     outline: 1px dotted white;
 }
 
@@ -127,9 +143,6 @@ body {
     height: 32px;
     margin-bottom: 2px;
 }
-.icon-computer { background: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png') no-repeat center/contain; }
-.icon-folder { background: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png') no-repeat center/contain; }
-.icon-file { background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain; }
 
 /* --- WINDOWS --- */
 .window {
@@ -139,6 +152,10 @@ body {
     z-index: 100;
     font-size: 12px;
     padding: 3px;
+    resize: both;
+    overflow: auto;
+    min-width: 200px;
+    min-height: 150px;
 }
 
 .title-bar {
@@ -153,6 +170,11 @@ body {
     margin-bottom: 2px;
 }
 
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
+}
+
 .title-bar-controls button {
     width: 16px;
     height: 14px;
@@ -162,7 +184,6 @@ body {
     line-height: 10px;
     text-align: center;
     padding: 0;
-    margin-left: 2px;
     background: var(--win-gray);
     border-top: 1px solid var(--win-light);
     border-left: 1px solid var(--win-light);
@@ -184,6 +205,9 @@ body {
     color: black;
     background: var(--win-gray);
     user-select: text;
+    height: calc(100% - 25px);
+    display: flex;
+    flex-direction: column;
 }
 
 .content-area {
@@ -191,16 +215,75 @@ body {
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
     padding: 15px;
-    height: 250px;
-    overflow-y: scroll;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
-h2 { margin-top: 0; font-size: 16px; border-bottom: 1px dotted #808080; padding-bottom: 5px;}
-h3 { font-size: 13px; margin-bottom: 5px; color: #4b0082; }
-h4 { font-size: 11px; margin-bottom: 5px; font-weight: bold; }
-ul { padding-left: 20px; font-size: 12px; }
-li { margin-bottom: 3px; }
-p { font-size: 12px; line-height: 1.4; margin-bottom: 10px;}
+h2 {
+    margin-top: 0;
+    font-size: 16px;
+    border-bottom: 1px dotted #808080;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #000080;
+}
+
+ul {
+    padding-left: 20px;
+    font-size: 12px;
+}
+
+li {
+    margin-bottom: 3px;
+}
+
+p {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* --- TERMINAL SPECIFIC STYLES --- */
+.terminal-window-body {
+    padding: 2px;
+}
+
+.terminal-content {
+    background-color: #000000;
+    color: #c0c0c0;
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 12px;
+    padding: 10px;
+    height: 100%;
+    /* Fill window */
+    overflow-y: auto;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.terminal-content p {
+    margin-bottom: 5px;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+}
+
+.terminal-command {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.terminal-comment {
+    color: #00ff00;
+    opacity: 0.7;
+    font-style: italic;
+}
+
 
 /* --- TASKBAR --- */
 .taskbar {
@@ -245,7 +328,6 @@ p { font-size: 12px; line-height: 1.4; margin-bottom: 10px;}
     margin: 0 5px;
 }
 
-/* Container for the window tabs */
 .taskbar-apps {
     display: flex;
     flex-grow: 1;
@@ -292,5 +374,13 @@ p { font-size: 12px; line-height: 1.4; margin-bottom: 10px;}
     min-width: 80px;
 }
 
-.contact-info { font-size: 11px; padding: 0 10px; }
-.contact-info a { color: blue; }
+.contact-info {
+    font-size: 11px;
+    padding: 0 10px;
+}
+
+.contact-info a {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px dotted blue;
+}

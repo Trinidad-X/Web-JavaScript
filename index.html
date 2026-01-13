@@ -5,65 +5,321 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trinidad Diez - Web JavaScript</title>
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">º
 </head>
 <body>
 
     <div id="bsod" onclick="reboot()">
         <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
         <br>
-        <p>* Press any key to terminate the current application.</p>
-        <p>* Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.</p>
-        <br>
         <p style="text-align: center;">Press any key to continue <span class="blink">_</span></p>
     </div>
 
     <div class="desktop" id="desktop-bg" onclick="handleDesktopClick()">
         
-        <div class="desktop-icon" onclick="openWindow('win-about', 'About Me', 'computer_explorer-0.png')">
-            <div class="icon-box icon-computer"></div>
-            <span>My Computer<br>(About Me)</span>
+        <div class="desktop-icon" onclick="openWindow('win-about', 'About Me.txt', 'computer_explorer-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png') no-repeat center/contain;"></div>
+            <span>About Me.txt</span>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-m04', 'M04 JS HTML', 'directory_open_file_mydocs-0.png')">
-            <div class="icon-box icon-folder"></div>
-            <span>M04</span>
+        <div class="desktop-icon" onclick="openWindow('win-terminal', 'Terminal.exe', 'console_prompt-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png') no-repeat center/contain;"></div>
+            <span>Terminal.exe</span>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-m09-1', 'M09 Basics', 'notepad-0.png')">
-            <div class="icon-box icon-file"></div>
-            <span>M09<br>Basics.js</span>
+        <div class="desktop-icon" onclick="openWindow('win-md', 'Markdown.md', 'template_empty-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/template_empty-0.png') no-repeat center/contain;"></div>
+            <span>Markdown.md</span>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('win-m09-2', 'M09 Functional', 'notepad-0.png')">
-            <div class="icon-box icon-file"></div>
-            <span>M09<br>Func.js</span>
+        <div class="desktop-icon" onclick="openWindow('win-html', 'index.html', 'html-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/html-0.png') no-repeat center/contain;"></div>
+            <span>index.html</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-css', 'styles.css', 'script-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/script-0.png') no-repeat center/contain;"></div>
+            <span>styles.css</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-xml', 'Data.xml', 'xml-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/xml-0.png') no-repeat center/contain;"></div>
+            <span>Data.xml</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-dtd', 'Rules.dtd', 'settings_gear-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/settings_gear-0.png') no-repeat center/contain;"></div>
+            <span>Rules.dtd</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-xsl', 'Style.xsl', 'paint_file-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/paint_file-0.png') no-repeat center/contain;"></div>
+            <span>Style.xsl</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-json', 'Data.json', 'chm-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/chm-0.png') no-repeat center/contain;"></div>
+            <span>Data.json</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-dom', 'DOM_Tree.js', 'network_cool_two_pcs-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png') no-repeat center/contain;"></div>
+            <span>DOM_Tree.js</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m04', 'M04_Notes.doc', 'directory_open_file_mydocs-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png') no-repeat center/contain;"></div>
+            <span>M04_Notes.doc</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m09-1', 'Basics.js', 'notepad-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;"></div>
+            <span>Basics.js</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-m09-2', 'Func.js', 'notepad-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;"></div>
+            <span>Func.js</span>
         </div>
 
     </div>
 
-    <div id="win-about" class="window win98-border" style="top: 10%; left: 10%;">
-        <div class="title-bar" onmousedown="startDrag(event, 'win-about')">
+    <div id="win-terminal" class="window win98-border" style="top: 42%; left: 60%; width: 500px; height: 350px;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-terminal')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" style="width:16px;">
-                About Me
+                <img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png" style="width:16px;">
+                Terminal.exe
             </div>
             <div class="title-bar-controls">
-                <button onclick="closeWindow('win-about')">X</button>
+                <button onclick="toggleMaximize('win-terminal')">□</button>
+                <button onclick="closeWindow('win-terminal')">X</button>
+            </div>
+        </div>
+        <div class="window-body terminal-window-body">
+            <div class="terminal-content">
+                <p>Linux Terminal [Version 1.0.1]</p>
+                <p>(c) 2026 Corporation. All rights reserved.</p>
+                <br>
+                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">pwd</span></p>
+                <p>/home/user <span class="terminal-comment"># Working Directory</span></p>
+                <br>
+                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">ls -la</span></p>
+                <p>-rw-r--r-- 1 user user  220 Jan 13 10:00 notes.txt</p>
+                <p>-rw-r--r-- 1 user user  120 Jan 13 10:05 style.css</p>
+                <br>
+                <p><span class="terminal-prompt">user@localhost:~/Documents$</span> <span class="blink">_</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-md" class="window win98-border" style="top: 12%; left: 15%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-md')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/template_empty-0.png" style="width:16px;">
+                Markdown.md
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-md')">□</button>
+                <button onclick="closeWindow('win-md')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset" style="font-family: 'Courier New', monospace;">
+                <h2>Markdown Syntax</h2>
+                <p># Heading 1<br>## Heading 2</p>
+                <p>**Bold Text**<br>*Italic Text*</p>
+                <hr>
+                <p>Status: Learned</p>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_markdown.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-html" class="window win98-border" style="top: 18%; left: 25%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-html')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/html-0.png" style="width:16px;">
+                index.html
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-html')">□</button>
+                <button onclick="closeWindow('win-html')">X</button>
             </div>
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>About Me</h2>
-                <p><strong>System:</strong> IciaFPInf v1.0</p>
-                <p><strong>User:</strong> Trinidad Diez</p>
-                <hr style="border: 0; border-top: 1px dotted #000;">
-                <h3>Collection of notes and practices</h3>
-                <p>Here you will find the exercises completed for modules <strong>M04</strong> and <strong>M09</strong> of the <strong>DAM01</strong> cycle at <strong>ITB</strong>.</p>
-                <p>Professor: Alicia Vázquez</p>
+                <h2>HTML5 Structure</h2>
+                <h3>Semantic Tags</h3>
+                <ul>
+                    <li>&lt;header&gt; &lt;nav&gt; &lt;main&gt;</li>
+                    <li>&lt;section&gt; &lt;article&gt; &lt;footer&gt;</li>
+                </ul>
+                <h3>Forms</h3>
+                <ul>
+                    <li>Inputs, Labels, Validation</li>
+                </ul>
             </div>
-            <div style="margin-top: 10px; text-align: right;">
-                <button class="win98-btn" onclick="closeWindow('win-about')">OK</button>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_html.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-css" class="window win98-border" style="top: 20%; left: 28%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-css')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/script-0.png" style="width:16px;">
+                styles.css
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-css')">□</button>
+                <button onclick="closeWindow('win-css')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>CSS3 Styling</h2>
+                <h3>Layouts</h3>
+                <ul>
+                    <li>Display: Flex (Flexbox)</li>
+                    <li>Display: Grid</li>
+                    <li>Position: Absolute/Relative</li>
+                </ul>
+                <h3>Design</h3>
+                <ul>
+                    <li>Box Model (Margin/Padding)</li>
+                    <li>Pseudo-classes (:hover)</li>
+                    <li>@media Queries</li>
+                </ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_css.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-xml" class="window win98-border" style="top: 22%; left: 35%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-xml')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/script-0.png" style="width:16px;">
+                Data.xml
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-xml')">□</button>
+                <button onclick="closeWindow('win-xml')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>eXtensible Markup Language</h2>
+                <p>Strict Syntax Rules.</p>
+                <div style="background:#eee; border:1px inset; padding:5px; font-family:monospace;">
+                    &lt;root&gt;...&lt;/root&gt;
+                </div>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_xml.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-dtd" class="window win98-border" style="top: 26%; left: 40%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-dtd')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png" style="width:16px;">
+                Rules.dtd
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-dtd')">□</button>
+                <button onclick="closeWindow('win-dtd')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>Document Type Definition</h2>
+                <p>Validation rules for XML.</p>
+                <ul><li>!ELEMENT</li><li>!ATTLIST</li></ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_dtd.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-xsl" class="window win98-border" style="top: 30%; left: 45%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-xsl')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png" style="width:16px;">
+                Style.xsl
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-xsl')">□</button>
+                <button onclick="closeWindow('win-xsl')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>XSL Transformations</h2>
+                <p>Transform XML to HTML.</p>
+                <ul><li>xsl:template</li><li>xsl:for-each</li></ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_xsl.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-json" class="window win98-border" style="top: 34%; left: 50%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-json')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/chm-0.png" style="width:16px;">
+                Data.json
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-json')">□</button>
+                <button onclick="closeWindow('win-json')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>JSON</h2>
+                <p>{ "key": "value" }</p>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_json.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-dom" class="window win98-border" style="top: 38%; left: 55%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-dom')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png" style="width:16px;">
+                DOM_Tree.js
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-dom')">□</button>
+                <button onclick="closeWindow('win-dom')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>The DOM</h2>
+                <p>Document Object Model.</p>
+                <ul><li>querySelector</li><li>addEventListener</li></ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_dom.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
             </div>
         </div>
     </div>
@@ -72,26 +328,21 @@
         <div class="title-bar" onmousedown="startDrag(event, 'win-m04')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-0.png" style="width:16px;">
-                M04 JS HTML
+                M04_Notes.doc
             </div>
             <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-m04')">□</button>
                 <button onclick="closeWindow('win-m04')">X</button>
             </div>
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>The DOM & Selectors</h2>
-                <p>Learning to select HTML elements using <code>getElementById</code> and <code>querySelector</code>.</p>
-                <h3>Exercises</h3>
-                <ul>
-                    <li>Exercise 1: Hacker</li>
-                    <li>Previous Exams</li>
-                    <li>Alphanumeric Keyboard</li>
-                </ul>
+                <h2>JS HTML Integration</h2>
+                <p>Connecting scripts to markup.</p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
-                <a href="#" class="win98-btn">Notes</a>
-                <a href="#" class="win98-btn">GitHub</a>
+                <button class="win98-btn" onclick="window.location.href='notes_dom.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
             </div>
         </div>
     </div>
@@ -100,25 +351,21 @@
         <div class="title-bar" onmousedown="startDrag(event, 'win-m09-1')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px;">
-                M09 Basics
+                Basics.js
             </div>
             <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-m09-1')">□</button>
                 <button onclick="closeWindow('win-m09-1')">X</button>
             </div>
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>Fundamentals & Modern Syntax</h2>
-                <p>Variables (let, const), Operators, Modals, Control Structures.</p>
-                <h3>Files</h3>
-                <ul>
-                    <li>Example 1.js</li>
-                    <li>Numbers Exercise.js</li>
-                </ul>
+                <h2>JS Basics</h2>
+                <p>Loops, Conditionals, Variables.</p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
-                <a href="#" class="win98-btn">Notes</a>
-                <a href="#" class="win98-btn">GitHub</a>
+                <button class="win98-btn" onclick="window.location.href='notes_js_basics.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
             </div>
         </div>
     </div>
@@ -127,22 +374,44 @@
         <div class="title-bar" onmousedown="startDrag(event, 'win-m09-2')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px;">
-                M09 Functional
+                Func.js
             </div>
             <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-m09-2')">□</button>
                 <button onclick="closeWindow('win-m09-2')">X</button>
             </div>
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>Functional Programming</h2>
-                <p>Arrow functions, Parameters, Destructuring, and Arrays.</p>
-                <h3>Exercises</h3>
-                <ul><li>Exercise 1.js</li></ul>
+                <h2>Functional JS</h2>
+                <p>Arrow functions, map, filter, reduce.</p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
-                <a href="#" class="win98-btn">Notes</a>
-                <a href="#" class="win98-btn">GitHub</a>
+                <button class="win98-btn" onclick="window.location.href='notes_js_func.html'">Notes</button>
+                <button class="win98-btn">Homework</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="win-about" class="window win98-border" style="top: 10%; left: 10%;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-about')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" style="width:16px;">
+                About Me.txt
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-about')">□</button>
+                <button onclick="closeWindow('win-about')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>About Me</h2>
+                <p><strong>User:</strong> Trinidad Diez</p>
+                <p>ITB / DAM01</p>
+            </div>
+            <div style="margin-top: 10px; text-align: right;">
+                <button class="win98-btn" onclick="closeWindow('win-about')">OK</button>
             </div>
         </div>
     </div>
@@ -184,11 +453,11 @@
         // --- WINDOW & TASKBAR MANAGEMENT ---
         let zIndexCounter = 100;
         let openWindows = []; // Array of objects: {id, title, icon}
+        let maximizedStates = {}; // Store dimensions before maximizing
 
         function openWindow(id, title, iconName) {
             const win = document.getElementById(id);
             
-            // Check if already open
             if (!openWindows.find(w => w.id === id)) {
                 openWindows.push({id, title, iconName});
                 renderTaskbar();
@@ -200,7 +469,6 @@
 
         function closeWindow(id) {
             document.getElementById(id).style.display = 'none';
-            // Remove from active windows array
             openWindows = openWindows.filter(w => w.id !== id);
             renderTaskbar();
         }
@@ -211,27 +479,51 @@
             const isTop = win.style.zIndex == zIndexCounter;
 
             if (isVisible && isTop) {
-                // Minimize
                 win.style.display = 'none';
             } else {
-                // Restore or Bring to Front
                 win.style.display = 'block';
                 bringToFront(win);
             }
-            renderTaskbar(); // To update 'active' styles
+            renderTaskbar(); 
         }
 
         function bringToFront(element) {
             zIndexCounter++;
             element.style.zIndex = zIndexCounter;
             
-            // Update Title Bar Colors
             document.querySelectorAll('.title-bar').forEach(tb => {
                 tb.style.background = 'var(--title-bar-bg-inactive)';
             });
             element.querySelector('.title-bar').style.background = 'var(--title-bar-bg-active)';
             
             renderTaskbar();
+        }
+
+        // --- MAXIMIZE LOGIC ---
+        function toggleMaximize(id) {
+            const win = document.getElementById(id);
+            
+            if (maximizedStates[id]) {
+                win.style.top = maximizedStates[id].top;
+                win.style.left = maximizedStates[id].left;
+                win.style.width = maximizedStates[id].width;
+                win.style.height = maximizedStates[id].height;
+                win.classList.remove('is-maximized');
+                delete maximizedStates[id];
+            } else {
+                maximizedStates[id] = {
+                    top: win.style.top,
+                    left: win.style.left,
+                    width: win.style.width,
+                    height: win.style.height
+                };
+                win.style.top = '0';
+                win.style.left = '0';
+                win.style.width = '100vw';
+                win.style.height = 'calc(100vh - 30px)'; // Height minus taskbar
+                win.classList.add('is-maximized');
+                bringToFront(win);
+            }
         }
 
         function renderTaskbar() {
@@ -264,11 +556,13 @@
         let offset = { x: 0, y: 0 };
 
         function startDrag(e, id) {
-            // Prevent dragging if clicking button
             if(e.target.tagName === 'BUTTON') return;
 
+            const win = document.getElementById(id);
+            if (win.classList.contains('is-maximized')) return;
+
             isDragging = true;
-            currentWindow = document.getElementById(id);
+            currentWindow = win;
             bringToFront(currentWindow);
             const rect = currentWindow.getBoundingClientRect();
             offset.x = e.clientX - rect.left;
@@ -295,21 +589,11 @@
         let clickTimer;
 
         function handleDesktopClick() {
-            // If dragging, don't count as click
             if (isDragging) return;
-            
-            // Check if clicking on an icon (bubbling), we only want background
-            // Actually, CSS handles icon clicks separately, but this catches background.
-            
             clickCount++;
             clearTimeout(clickTimer);
-            
-            // Reset count if not clicked rapidly
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 800);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 800);
 
-            // Trigger BSOD on 3rd rapid click
             if (clickCount >= 3) {
                 document.getElementById('bsod').style.display = 'block';
                 clickCount = 0;
