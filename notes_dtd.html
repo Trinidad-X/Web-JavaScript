@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DTD Interactive Notes</title>
-    <link rel="stylesheet" href="/styles/notes.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <style>
         .interactive-box {
             background: #e0e0e0;
@@ -38,12 +38,12 @@
         th { background: #c0c0c0; }
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
-        <div class="title-bar-text">Notes Viewer</div>
+        <div class="title-bar-text">DTD - Document Type Definition</div>
         <div class="title-bar-controls">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
@@ -139,21 +139,13 @@
                 <summary><strong>05 Entities</strong></summary>
                 <p>Variables for text. Used to avoid repetition or handle special characters.</p>
                 <pre>&lt;!ENTITY company "Acme Corp Global"&gt;</pre>
-                <p>Usage in XML: <code>&copyright; &company;</code></p>
+                <p>Usage in XML: <code>&amp;company;</code></p>
             </details>
-        </div>
-        
-        <div class="window-footer">
-            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
 <script>
-    function closeWindow() {
-        document.getElementById('mainWindow').style.display = 'none';
-    }
-
     // --- Element Builder Logic ---
     function updateElementRule() {
         const p = document.getElementById('parentEl').value;

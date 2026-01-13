@@ -4,44 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM Interactive Notes</title>
+    <link rel="stylesheet" href="styles/styles.css">
     <style>
-        /* Window Chrome */
-        .window {
-            width: 95vw; height: 95vh;
-            margin: 2.5vh auto;
-            background: var(--win-gray);
-            border: 2px solid;
-            border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-            display: flex; flex-direction: column;
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
-        }
-        .title-bar {
-            background: linear-gradient(90deg, var(--win-blue), #1084d0);
-            padding: 4px 8px;
-            display: flex; justify-content: space-between; align-items: center;
-            color: white; font-weight: bold; font-size: 14px;
-        }
-        .window-body {
-            flex: 1; padding: 10px; overflow-y: auto;
-            scrollbar-width: thin;
-        }
-
-        /* Content Styling */
-        h2 { border-bottom: 2px solid var(--win-dark); color: #333; margin-top: 0;}
-        h3 { margin-bottom: 5px; color: var(--win-blue); }
-        
-        details { margin-bottom: 10px; border: 1px solid #999; padding: 5px; background: #eee; box-shadow: 2px 2px 0px #fff inset; }
-        summary { cursor: pointer; font-weight: bold; user-select: none; padding: 5px; }
-        summary:hover { background: #ddd; }
-        
-        pre { 
-            background: var(--code-bg); color: var(--code-text);
-            padding: 10px; border-radius: 4px; overflow-x: auto; 
-            font-family: 'Consolas', monospace; border: 2px inset;
-        }
-        code { font-family: 'Consolas', monospace; color: #d63384; background: #e0e0e0; padding: 2px 4px; border-radius: 3px;}
-
-        /* --- INTERACTIVE TOOLS --- */
+        /* Interactive Tools */
         .tool-panel {
             background: #d4d4d4; border: 2px inset white; padding: 10px; margin: 10px 0;
             display: flex; gap: 10px; flex-wrap: wrap;
@@ -55,9 +20,7 @@
             transition: all 0.3s;
         }
         .dom-node.highlighted { background: #ff0; border-color: red; transform: scale(1.1); box-shadow: 0 0 10px yellow; }
-        .btn { cursor: pointer; background: var(--win-gray); border: 2px outset white; padding: 2px 10px; font-weight: bold;}
-        .btn:active { border-style: inset; }
-
+        
         /* Keypad Demo */
         #keypad-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 150px; margin-top: 10px;}
         .key { padding: 15px; text-align: center; background: #fff; border: 1px solid #888; cursor: pointer; user-select: none;}
@@ -67,118 +30,112 @@
         /* Event Logger */
         #event-box { width: 100%; height: 60px; background: pink; border: 2px dashed red; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none;}
         #event-log { height: 100px; background: #fff; border: 2px inset; overflow-y: auto; font-family: monospace; font-size: 12px; padding: 5px; margin-top: 5px;}
-
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
         <div class="title-bar-text">DOM - Document Object Model (Interactive)</div>
         <div class="title-bar-controls">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+            <button onclick="window.location.href='index.html'">X</button>
+        </div>
     </div>
     
     <div class="window-body">
-        
-        <details open>
-            <summary><strong>1. The DOM Tree Structure</strong></summary>
-            <p>The DOM treats an HTML document as a tree structure. The document is the root, and every tag, text, and attribute is a node.</p>
-            
-            
-
-            <div class="tool-panel">
-                <div style="flex: 1;">
-                    <strong>Visual Hierarchy:</strong><br>
-                    <ul style="margin-top:5px; padding-left: 20px;">
-                        <li><code>document</code> (The Root)
-                            <ul>
-                                <li><code>&lt;html&gt;</code>
-                                    <ul>
-                                        <li><code>&lt;head&gt;</code>...</li>
-                                        <li><code>&lt;body&gt;</code>
-                                            <ul>
-                                                <li><code>&lt;h1&gt;</code></li>
-                                                <li><code>&lt;div&gt;</code></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div class="content-area">
+            <details open>
+                <summary><strong>1. The DOM Tree Structure</strong></summary>
+                <p>The DOM treats an HTML document as a tree structure. The document is the root, and every tag, text, and attribute is a node.</p>
+                
+                <div class="tool-panel">
+                    <div style="flex: 1;">
+                        <strong>Visual Hierarchy:</strong><br>
+                        <ul style="margin-top:5px; padding-left: 20px;">
+                            <li><code>document</code> (The Root)
+                                <ul>
+                                    <li><code>&lt;html&gt;</code>
+                                        <ul>
+                                            <li><code>&lt;head&gt;</code>...</li>
+                                            <li><code>&lt;body&gt;</code>
+                                                <ul>
+                                                    <li><code>&lt;h1&gt;</code></li>
+                                                    <li><code>&lt;div&gt;</code></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </details>
+            </details>
 
-        <details>
-            <summary><strong>2. Scripts: Defer vs Async</strong></summary>
-            <p>Where you place your script tag matters for performance and DOM availability.</p>
-            
-            
-            
-            <table style="width:100%; border-collapse: collapse; border: 1px solid #999; margin-top: 10px;">
-                <tr style="background:#ccc;"><th>Attribute</th><th>Downloads</th><th>Executes</th><th>Use Case</th></tr>
-                <tr><td><code>&lt;none&gt;</code></td><td>Pauses HTML parsing</td><td>Immediately</td><td>Old code, small scripts</td></tr>
-                <tr><td><code>async</code></td><td>Parallel</td><td>As soon as downloaded</td><td>Analytics, Ads (independent scripts)</td></tr>
-                <tr><td><code>defer</code></td><td>Parallel</td><td>After HTML parsing</td><td><strong>Best practice</strong> for DOM manipulation</td></tr>
-            </table>
-        </details>
+            <details>
+                <summary><strong>2. Scripts: Defer vs Async</strong></summary>
+                <p>Where you place your script tag matters for performance and DOM availability.</p>
+                
+                <table>
+                    <tr style="background:#ccc;"><th>Attribute</th><th>Downloads</th><th>Executes</th><th>Use Case</th></tr>
+                    <tr><td><code>&lt;none&gt;</code></td><td>Pauses HTML parsing</td><td>Immediately</td><td>Old code, small scripts</td></tr>
+                    <tr><td><code>async</code></td><td>Parallel</td><td>As soon as downloaded</td><td>Analytics, Ads (independent scripts)</td></tr>
+                    <tr><td><code>defer</code></td><td>Parallel</td><td>After HTML parsing</td><td><strong>Best practice</strong> for DOM manipulation</td></tr>
+                </table>
+            </details>
 
-        <details>
-            <summary><strong>3. Selecting Elements (Interactive Playground)</strong></summary>
-            <p>Test different selectors to see which elements get targeted.</p>
-            
-            <div class="tool-panel">
-                <div style="width: 100%;">
-                    <button class="btn" onclick="highlight('.circle')">.querySelector('.circle')</button>
-                    <button class="btn" onclick="highlight('#unique')">.getElementById('unique')</button>
-                    <button class="btn" onclick="highlight('div')">.getElementsByTagName('div')</button>
-                    <button class="btn" onclick="highlight('.square')">.querySelectorAll('.square')</button>
-                    <button class="btn" onclick="resetHighlight()">Reset</button>
+            <details>
+                <summary><strong>3. Selecting Elements (Interactive Playground)</strong></summary>
+                <p>Test different selectors to see which elements get targeted.</p>
+                
+                <div class="tool-panel">
+                    <div style="width: 100%;">
+                        <button class="win98-btn" onclick="highlight('.circle')">.querySelector('.circle')</button>
+                        <button class="win98-btn" onclick="highlight('#unique')">.getElementById('unique')</button>
+                        <button class="win98-btn" onclick="highlight('div')">.getElementsByTagName('div')</button>
+                        <button class="win98-btn" onclick="highlight('.square')">.querySelectorAll('.square')</button>
+                        <button class="win98-btn" onclick="resetHighlight()">Reset</button>
+                    </div>
+
+                    <div class="selector-box">
+                        <div class="dom-node circle" style="border-radius: 50%;">div<br>.circle</div>
+                        <div class="dom-node square">div<br>.square</div>
+                        <div class="dom-node square" id="unique" style="background: #e0f0ff;">div<br>#unique</div>
+                        <div class="dom-node circle" style="border-radius: 50%;">div<br>.circle</div>
+                    </div>
                 </div>
-
-                <div class="selector-box">
-                    <div class="dom-node circle" style="border-radius: 50%;">div<br>.circle</div>
-                    <div class="dom-node square">div<br>.square</div>
-                    <div class="dom-node square" id="unique" style="background: #e0f0ff;">div<br>#unique</div>
-                    <div class="dom-node circle" style="border-radius: 50%;">div<br>.circle</div>
-                </div>
-            </div>
-            
-            <pre><code>// Example
+                
+                <pre><code>// Example
 let el = document.querySelector(".circle"); // Selects only the first circle
 let list = document.querySelectorAll(".circle"); // Selects ALL circles</code></pre>
-        </details>
+            </details>
 
-        <details>
-            <summary><strong>4. Event Listeners & The Event Object</strong></summary>
-            <p>Interact with the pink box below. It listens for <code>click</code>, <code>dblclick</code>, and <code>mousemove</code>.</p>
-            
-            
+            <details>
+                <summary><strong>4. Event Listeners & The Event Object</strong></summary>
+                <p>Interact with the pink box below. It listens for <code>click</code>, <code>dblclick</code>, and <code>mousemove</code>.</p>
+                
+                <div class="tool-panel">
+                    <div style="flex: 1;">
+                        <div id="event-box">Interact with me! (Click, Move, Double Click)</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div id="event-log">Waiting for events...</div>
+                        <button class="win98-btn" onclick="document.getElementById('event-log').innerHTML=''">Clear Log</button>
+                    </div>
+                </div>
+            </details>
 
-            <div class="tool-panel">
-                <div style="flex: 1;">
-                    <div id="event-box">Interact with me! (Click, Move, Double Click)</div>
-                </div>
-                <div style="flex: 1;">
-                    <div id="event-log">Waiting for events...</div>
-                    <button class="btn" onclick="document.getElementById('event-log').innerHTML=''">Clear Log</button>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary><strong>5. Creating Elements (Numeric Keypad Demo)</strong></summary>
-            <p>This is the solution to <strong>Exercise 2</strong>. These buttons were generated entirely by JavaScript loops, not written in HTML.</p>
-            
-            <div class="tool-panel">
-                <div>
-                    <div id="display-screen">0</div>
-                    <div id="keypad-container"></div>
-                </div>
-                <div style="flex:1; padding-left: 10px;">
-                    <strong>Logic used:</strong>
-                    <pre style="margin:0; font-size: 0.8em; height: 150px;">
+            <details>
+                <summary><strong>5. Creating Elements (Numeric Keypad Demo)</strong></summary>
+                <p>This is the solution to <strong>Exercise 2</strong>. These buttons were generated entirely by JavaScript loops, not written in HTML.</p>
+                
+                <div class="tool-panel">
+                    <div>
+                        <div id="display-screen">0</div>
+                        <div id="keypad-container"></div>
+                    </div>
+                    <div style="flex:1; padding-left: 10px;">
+                        <strong>Logic used:</strong>
+                        <pre style="margin:0; font-size: 0.8em; height: 150px;">
 for(let i=1; i<=9; i++) {
   let btn = document.createElement("div");
   btn.className = "key";
@@ -186,36 +143,27 @@ for(let i=1; i<=9; i++) {
   btn.onclick = () => updateScreen(i);
   container.appendChild(btn);
 }</pre>
+                    </div>
                 </div>
-            </div>
-        </details>
-
+            </details>
+        </div>
     </div>
 </div>
 
 <script>
     // --- SELECTOR TOOL LOGIC ---
     function highlight(selector) {
-        // Reset first
         resetHighlight();
         
         let elements;
         if(selector.startsWith('#')) {
-            // ID selector simulation
             let el = document.getElementById(selector.substring(1));
             if(el) elements = [el];
-        } else if (selector.startsWith('.')) {
-            // Class selector
-            elements = document.querySelectorAll(selector);
         } else {
-            // Tag selector
-            elements = document.getElementsByTagName(selector); // Returns HTMLCollection
-            // Note: In real app, querySelectorAll is usually preferred for static lists
-            elements = document.querySelectorAll(selector); // Simulating tag select
+            elements = document.querySelectorAll(selector);
         }
 
         if(elements) {
-            // Handle both single element and NodeList
             if(elements.length === undefined) {
                  elements.classList.add('highlighted');
             } else {
@@ -241,23 +189,21 @@ for(let i=1; i<=9; i++) {
         
         const entry = document.createElement('div');
         entry.innerHTML = msg;
-        log.prepend(entry); // Add to top
+        log.prepend(entry);
     }
 
     box.addEventListener('click', logEvent);
     box.addEventListener('dblclick', logEvent);
     box.addEventListener('mousemove', (e) => {
-        // Throttle mousemove so it doesn't flood too crazy
         if(Math.random() > 0.8) logEvent(e);
     });
 
-    // --- KEYPAD GENERATOR (EXERCISE SOLUTION) ---
+    // --- KEYPAD GENERATOR ---
     const keypad = document.getElementById('keypad-container');
     const screen = document.getElementById('display-screen');
     let currentInput = "";
 
     function createKeypad() {
-        // Create 1-9
         for (let i = 1; i <= 9; i++) {
             let key = document.createElement('div');
             key.className = 'key';
@@ -266,25 +212,22 @@ for(let i=1; i<=9; i++) {
             keypad.appendChild(key);
         }
         
-        // Create 0
         let zero = document.createElement('div');
         zero.className = 'key';
         zero.textContent = 0;
-        zero.style.gridColumn = "2"; // Center the 0
+        zero.style.gridColumn = "2";
         zero.onclick = function() { typeNumber(0); };
         keypad.appendChild(zero);
     }
 
     function typeNumber(num) {
-        if(currentInput.length < 10) { // Limit length
+        if(currentInput.length < 10) {
             currentInput += num;
             screen.textContent = currentInput;
         }
     }
 
-    // Initialize Keypad
     createKeypad();
-
 </script>
 </body>
 </html>

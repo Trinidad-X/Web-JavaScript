@@ -1,11 +1,16 @@
 :root {
     --desktop-bg: #008080;
     --win-gray: #c0c0c0;
-    --win-text: #000000;
     --win-dark: #808080;
     --win-light: #ffffff;
-    --title-bar-bg-active: linear-gradient(90deg, #000080, #1084d0);
+    --win-blue: #000080;
+    --win-text: #000000;
+    --border-light: #dfdfdf;
     --border-dark: #404040;
+    --title-bar-bg-active: linear-gradient(90deg, var(--win-blue), #1084d0);
+    --title-bar-bg-inactive: #808080;
+    --code-bg: #282c34;
+    --code-text: #abb2bf;
 }
 
 * {
@@ -15,42 +20,63 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Tahoma', 'Verdana', sans-serif;
     background-color: var(--desktop-bg);
+    font-family: 'Tahoma', 'Verdana', 'Segoe UI', sans-serif;
     height: 100vh;
     width: 100vw;
-    overflow: hidden; /* Prevents double scrollbars */
+    overflow: hidden;
     display: flex;
-    /* Centering is technically not needed if window is 100%, but harmless to keep */
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     user-select: none;
+}
+
+/* --- BSOD STYLE --- */
+#bsod {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000aa;
+    color: white;
+    font-family: 'Courier New', monospace;
+    z-index: 999999;
+    padding: 10% 15%;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
 
 /* --- 98 UTILS --- */
 .win98-border {
     background: var(--win-gray);
-    border-top: 2px solid var(--win-light);
-    border-left: 2px solid var(--win-light);
-    border-right: 2px solid var(--border-dark);
-    border-bottom: 2px solid var(--border-dark);
+    border: 2px solid;
+    border-color: var(--win-light) var(--border-dark) var(--border-dark) var(--win-light);
     box-shadow: 1px 1px 0 black;
 }
 
 .win98-inset {
     background: white;
-    border-top: 2px solid var(--border-dark);
-    border-left: 2px solid var(--border-dark);
-    border-right: 2px solid var(--win-light);
-    border-bottom: 2px solid var(--win-light);
+    border: 2px solid;
+    border-color: var(--border-dark) var(--win-light) var(--win-light) var(--border-dark);
 }
 
 .win98-btn {
     background: var(--win-gray);
-    border-top: 2px solid var(--win-light);
-    border-left: 2px solid var(--win-light);
-    border-right: 2px solid var(--win-dark);
-    border-bottom: 2px solid var(--win-dark);
+    border: 2px solid;
+    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
     box-shadow: 1px 1px 0 black;
     padding: 4px 10px;
     color: black;
@@ -62,24 +88,81 @@ body {
     font-family: 'Tahoma', sans-serif;
 }
 
-.win98-btn:active {
-    border-top: 2px solid var(--win-dark);
-    border-left: 2px solid var(--win-dark);
-    border-right: 2px solid var(--win-light);
-    border-bottom: 2px solid var(--win-light);
-    box-shadow: none;
+.win98-btn:active,
+.taskbar-item.active,
+.win98-btn.active {
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    box-shadow: inset 1px 1px 0 black;
     background: #e0e0e0;
-    transform: translate(0, 0);
 }
 
-/* --- SINGLE WINDOW STYLE --- */
-.window {
-    /* CHANGED: Set width and height to 100% to fill the parent (body) */
-    width: 100%;
-    height: 100%;
+/* --- DESKTOP ICONS --- */
+.desktop {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 30px;
+    overflow: auto;
+}
+
+.desktop-icon {
+    width: 80px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.desktop-icon span {
+    margin-top: 5px;
+    padding: 2px;
+    font-size: 11px;
+    text-shadow: 1px 1px 0 #000;
+    background-color: transparent;
+    word-break: break-word;
+}
+
+.desktop-icon:active span,
+.desktop-icon.selected span {
+    background: var(--win-blue);
+    outline: 1px dotted white;
+}
+
+.icon-box {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 2px;
+}
+
+/* --- WINDOWS --- */
+.window {
+    position: absolute;
+    min-width: 300px;
+    min-height: 200px;
+    width: 500px;
+    height: 400px;
+    display: none;
+    z-index: 100;
+    font-size: 12px;
+    resize: both;
+    overflow: auto;
+    background: var(--win-gray);
+    border: 2px solid;
+    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
     padding: 3px;
+}
+
+.window.maximized {
+    width: 100% !important;
+    height: calc(100% - 30px) !important;
+    top: 0 !important;
+    left: 0 !important;
+    resize: none;
 }
 
 .title-bar {
@@ -92,6 +175,17 @@ body {
     font-weight: bold;
     letter-spacing: 0.5px;
     margin-bottom: 2px;
+    cursor: move;
+    user-select: none;
+}
+
+.title-bar.inactive {
+    background: var(--title-bar-bg-inactive);
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
 }
 
 .title-bar-controls button {
@@ -104,309 +198,264 @@ body {
     text-align: center;
     padding: 0;
     background: var(--win-gray);
-    border-top: 1px solid var(--win-light);
-    border-left: 1px solid var(--win-light);
-    border-right: 1px solid var(--border-dark);
-    border-bottom: 1px solid var(--border-dark);
+    border: 1px solid;
+    border-color: var(--win-light) var(--border-dark) var(--border-dark) var(--win-light);
     box-shadow: 1px 1px 0 black;
     cursor: pointer;
 }
 
 .title-bar-controls button:active {
-    border-top: 1px solid var(--border-dark);
-    border-left: 1px solid var(--border-dark);
-    border-right: 1px solid var(--win-light);
-    border-bottom: 1px solid var(--win-light);
+    border-color: var(--border-dark) var(--win-light) var(--win-light) var(--border-dark);
 }
 
 .window-body {
-    padding: 10px;
+    flex: 1;
+    padding: 2px;
     color: black;
     background: var(--win-gray);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    user-select: text;
+    overflow: auto;
+    height: calc(100% - 25px);
 }
 
 .content-area {
     background: white;
     border: 2px solid;
-    border-color: #808080 #ffffff #ffffff #808080;
-    padding: 20px;
-    flex-grow: 1;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    padding: 15px;
+    height: 100%;
     overflow-y: auto;
-    /* Scrollable content */
-    user-select: text;
-    /* Allow copying text in notes */
 }
 
-/* --- CONTENT STYLES (Diagrams, Text) --- */
+/* --- CONTENT STYLING --- */
 h2 {
     margin-top: 0;
-    font-size: 18px;
-    border-bottom: 1px dotted #808080;
+    font-size: 16px;
+    border-bottom: 2px solid var(--win-dark);
+    color: #333;
     padding-bottom: 5px;
-    color: #000;
 }
 
 h3 {
-    font-size: 14px;
-    margin-top: 15px;
+    font-size: 13px;
     margin-bottom: 5px;
-    color: #000080;
-    font-weight: bold;
+    color: var(--win-blue);
 }
 
 p {
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.4;
     margin-bottom: 10px;
 }
 
-ul,
-ol {
+ul {
     padding-left: 20px;
-    font-size: 13px;
-    margin-top: 5px;
-}
-
-code {
-    font-family: 'Courier New', monospace;
-    background: #eee;
-    padding: 0 3px;
-    color: #c7254e;
     font-size: 12px;
 }
 
-pre {
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow-x: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-}
-
-/* DIAGRAMS CSS */
-.box-model {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f8cb00;
-    padding: 20px;
-    border: 1px dashed black;
-    position: relative;
-    margin: 10px 0;
-    color: #333;
-    font-weight: bold;
-}
-
-.box-model::after {
-    content: "Margin";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 10px;
-}
-
-.box-border {
-    background: #000;
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.box-border::after {
-    content: "Border";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    color: #fff;
-    font-size: 10px;
-}
-
-.box-padding {
-    background: #c3dd88;
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.box-padding::after {
-    content: "Padding";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-size: 10px;
-}
-
-.box-content {
-    background: #88c3dd;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.tree-node {
-    border: 1px solid #888;
-    background: #eee;
-    padding: 5px;
-    margin: 5px;
-    text-align: center;
-    border-radius: 4px;
-    font-family: monospace;
-    font-weight: bold;
-}
-
-.tree-connector {
-    width: 1px;
-    height: 10px;
-    background: #888;
-    margin: 0 auto;
-}
-
-.tree-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.tag-block {
-    display: inline-block;
-    border: 1px solid #000080;
-    background: #e6e6ff;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: monospace;
-    color: #000080;
-    cursor: help;
-    margin: 2px;
-}
-
-.tag-block:hover {
-    background: #000080;
-    color: white;
+li {
+    margin-bottom: 3px;
 }
 
 details {
-    background: #eee;
-    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border: 1px dotted #888;
     padding: 5px;
-    margin-bottom: 5px;
+    background: #e0e0e0;
 }
 
 summary {
     cursor: pointer;
     font-weight: bold;
-    outline: none;
+    user-select: none;
 }
 
-/* Update this class to force full screen using fixed positioning */
-.window {
-    position: fixed;  /* Anchors window to the screen edges */
-    top: 0;
-    left: 0;
-    width: 100vw;     /* 100% of viewport width */
-    height: 100vh;    /* 100% of viewport height */
-    margin: 0;
+summary:hover {
+    background: #d0d0d0;
+}
+
+/* --- CODE STYLING --- */
+pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 10px;
+    border: 2px inset;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    margin: 10px 0;
+}
+
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #d63384;
+    background: #eee;
+    padding: 2px 4px;
+}
+
+.dark-code code {
+    background: transparent;
+    color: inherit;
+}
+
+/* --- TERMINAL SPECIFIC --- */
+.terminal-content {
+    background-color: #000000;
+    color: #c0c0c0;
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 12px;
+    padding: 10px;
+    height: 100%;
+    overflow-y: auto;
+    border: 2px solid;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+}
+
+.terminal-content p {
+    margin-bottom: 5px;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+}
+
+.terminal-command {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.terminal-comment {
+    color: #00ff00;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* --- TASKBAR --- */
+.taskbar {
+    height: 30px;
+    background: var(--win-gray);
+    border-top: 2px solid var(--win-light);
     display: flex;
-    flex-direction: column;
-    padding: 3px;
-    z-index: 10;
+    align-items: center;
+    padding: 2px;
+    z-index: 9999;
+    flex-shrink: 0;
 }
 
-/* Add this NEW class for the area containing your Close button */
-.window-footer {
+.start-btn {
+    height: 24px;
     display: flex;
-    justify-content: flex-end; /* Aligns button to the right */
-    padding-top: 8px;          /* Adds space between content and button */
-    margin-top: auto;          /* Crucial: Pushes footer to the very bottom */
+    align-items: center;
+    gap: 5px;
+    padding: 0 8px;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 11px;
+    font-style: italic;
+    border: 2px solid;
+    border-color: var(--win-light) var(--border-dark) var(--border-dark) var(--win-light);
+    box-shadow: 1px 1px 0 black;
+    cursor: pointer;
+    background: var(--win-gray);
 }
 
-/* Specific styles for the interactive tools */
-        .interactive-box {
-            background: #e0e0e0;
-            border: 1px inset white;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .tool-row {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .tool-row input {
-            padding: 2px 5px;
-            border: 1px inset #fff;
-        }
-        .console-output {
-            background: black;
-            color: lime;
-            font-family: 'Courier New', monospace;
-            padding: 10px;
-            height: 100px;
-            overflow-y: auto;
-            border: 2px inset #808080;
-            margin-top: 5px;
-        }
+.start-icon-img {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #008080 50%, #c0c0c0 50%);
+    border: 1px solid #000;
+}
 
-/* Specific styles for interactive elements within the notes */
-        .interactive-box {
-            background: #e0e0e0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            padding: 10px;
-            margin: 10px 0;
-            font-family: 'Tahoma', sans-serif;
-        }
-        .tool-row {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .tool-row input {
-            padding: 3px;
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-        }
-        .console-output {
-            background: black;
-            color: lime;
-            font-family: 'Courier New', monospace;
-            padding: 10px;
-            height: 120px;
-            overflow-y: auto;
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .output-label {
-            font-style: italic; 
-            color: #000080; 
-            margin-top: 5px;
-            min-height: 1.2em;
-        }
-        /* Override body/window styles from CSS to ensure full screen per previous request */
-        body, html {
-            overflow: hidden;
-            height: 100%;
-            margin: 0;
-        }
-        .window {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
+.taskbar-divider {
+    width: 2px;
+    height: 20px;
+    background: var(--border-dark);
+    border-right: 1px solid var(--win-light);
+    margin: 0 5px;
+}
+
+.taskbar-apps {
+    display: flex;
+    flex: 1;
+    gap: 3px;
+    padding-left: 5px;
+    overflow: hidden;
+}
+
+.taskbar-item {
+    min-width: 150px;
+    max-width: 200px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 11px;
+    background: var(--win-gray);
+    border: 2px solid;
+    border-color: var(--win-light) var(--border-dark) var(--border-dark) var(--win-light);
+    box-shadow: 1px 1px 0 black;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.taskbar-item img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.tray {
+    margin-left: auto;
+    border: 2px solid;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+    padding: 0 10px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    background: var(--win-gray);
+    min-width: 80px;
+}
+
+.contact-info {
+    font-size: 11px;
+    padding: 0 10px;
+}
+
+.contact-info a {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px dotted blue;
+}
+
+/* --- SCROLLBARS --- */
+.window-body::-webkit-scrollbar,
+.content-area::-webkit-scrollbar,
+.terminal-content::-webkit-scrollbar {
+    width: 16px;
+}
+
+.window-body::-webkit-scrollbar-track,
+.content-area::-webkit-scrollbar-track,
+.terminal-content::-webkit-scrollbar-track {
+    background: var(--win-gray);
+    border: 2px solid;
+    border-color: var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+}
+
+.window-body::-webkit-scrollbar-thumb,
+.content-area::-webkit-scrollbar-thumb,
+.terminal-content::-webkit-scrollbar-thumb {
+    background: var(--win-dark);
+    border: 2px solid;
+    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+}
+
+.window-body::-webkit-scrollbar-button {
+    background: var(--win-gray);
+    border: 2px solid;
+    border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+    width: 16px;
+    height: 16px;
+}
