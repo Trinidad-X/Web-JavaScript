@@ -3,30 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
-    <link rel="stylesheet" href="/styles/notes.css">
+    <title>JSON Interactive Notes</title>
+    <style>
+        :root {
+            --win-gray: #c0c0c0;
+            --win-dark: #808080;
+            --win-light: #ffffff;
+            --win-blue: #000080;
+            --code-bg: #282c34;
+            --code-text: #abb2bf;
+        }
+        body { background-color: #008080; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; margin: 0; overflow: hidden; }
+        
+        /* Window Chrome */
+        .window {
+            width: 90vw; height: 90vh;
+            margin: 5vh auto;
+            background: var(--win-gray);
+            border: 2px solid;
+            border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+            display: flex; flex-direction: column;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+        }
+        .title-bar {
+            background: linear-gradient(90deg, var(--win-blue), #1084d0);
+            padding: 4px 8px;
+            display: flex; justify-content: space-between; align-items: center;
+            color: white; font-weight: bold; font-size: 14px;
+        }
+        .window-body {
+            flex: 1; padding: 10px; overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--win-dark) var(--win-gray);
+        }
+
+        /* Content Styling */
+        h2 { border-bottom: 2px solid var(--win-dark); color: #333; margin-top: 0;}
+        details { margin-bottom: 10px; border: 1px dotted #888; padding: 5px; background: #e0e0e0; }
+        summary { cursor: pointer; font-weight: bold; user-select: none; }
+        summary:hover { background: #d0d0d0; }
+        
+        pre { 
+            background: var(--code-bg); 
+            color: var(--code-text);
+            padding: 10px; 
+            border: 2px inset; 
+            overflow-x: auto; 
+            font-family: 'Consolas', monospace;
+            border-radius: 4px;
+        }
+        code { font-family: 'Consolas', monospace; color: #d63384; background: #eee; padding: 2px 4px; }
+        .dark-code code { background: transparent; color: inherit; }
+
+        /* --- INTERACTIVE TOOLS --- */
+        
+        /* 1. Validator Tool */
+        .tool-panel { display: flex; gap: 10px; margin-top: 10px; height: 250px; }
+        .tool-col { flex: 1; display: flex; flex-direction: column; }
+        textarea.json-input { 
+            flex: 1; resize: none; padding: 10px; font-family: monospace; 
+            border: 2px inset white; background: white;
+        }
+        .status-bar { 
+            margin-top: 5px; padding: 5px; font-weight: bold; 
+            color: white; background: #888; border: 1px inset; text-align: center;
+        }
+        .valid { background: #008000; }
+        .invalid { background: #800000; }
+
+        /* 2. Format Switcher */
+        .tabs { display: flex; gap: 2px; margin-bottom: -2px; z-index: 10; }
+        .tab-btn {
+            background: var(--win-gray); border: 1px solid var(--win-dark);
+            border-bottom: none; padding: 5px 15px; cursor: pointer;
+            border-radius: 5px 5px 0 0; font-weight: bold;
+        }
+        .tab-btn.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px; padding-bottom: 7px; }
+        .tab-content { background: #fff; border: 2px solid var(--win-dark); padding: 15px; min-height: 150px; }
+
+    </style>
 </head>
 <body>
-
 <div class="window">
     <div class="title-bar">
-        <div class="title-bar-text">Notes Viewer</div>
+        <div class="title-bar-text">JSON - JavaScript Object Notation</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
+            <button style="font-weight:bold; width:20px;">X</button>
         </div>
     </div>
     
     <div class="window-body">
-        <div class="content-area">
-             <p>Topic Title...</p>
-        </div>
         
-        <div class="window-footer">
-            <button class="win98-btn">Close</button>
-        </div>
+        <details open>
+            <summary><strong>01. Live JSON Validator & Formatter</strong></summary>
+            <p>Paste messy JSON on the left. It will automatically format on the right, or tell you if you made a syntax error (like using single quotes!).</p>
+            <div class="tool-panel">
+                <div class="tool-col">
+                    <label><strong>Input (Messy)</strong></label>
+                    <textarea class="json-input" id="inputJson" oninput="validateJSON()">{ "name": "John", "age": 30, "city": "New York", 'badQuote': true }</textarea>
+                </div>
+                <div class="tool-col">
+                    <label><strong>Output (Pretty Print)</strong></label>
+                    <textarea class="json-input" id="outputJson" readonly></textarea>
+                </div>
+            </div>
+            <div id="statusIndicator" class="status-bar invalid">Invalid JSON: Unexpected token ' in JSON at position 47</div>
+        </details>
+
+        <details>
+            <summary><strong>02. Introduction & Syntax</strong></summary>
+            
+            <p><strong>JSON</strong> is a text format for storing and transporting data. It is language-independent but uses JavaScript syntax.</p>
+            <ul>
+                <li><strong>Data Types:</strong> String, Number, Boolean, Array <code>[]</code>, Object <code>{}</code>, null.</li>
+                <li><strong>Rules:</strong>
+                    <ul>
+                        <li>Keys must be in <code>"double quotes"</code>.</li>
+                        <li>No trailing commas allowed.</li>
+                        <li>No comments allowed.</li>
+                    </ul>
+                </li>
+            </ul>
+        </details>
+
+        <details>
+            <summary><strong>03. Format Comparison (Interactive)</strong></summary>
+            <p>Click the tabs to see how the same data looks in different formats.</p>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('json')">JSON</button>
+                <button class="tab-btn" onclick="switchTab('xml')">XML</button>
+                <button class="tab-btn" onclick="switchTab('yaml')">YAML</button>
+            </div>
+            <div class="tab-content">
+                <pre class="dark-code"><code id="compareCode">
+{
+  "employee": {
+    "name": "John Doe",
+    "role": "Developer",
+    "active": true
+  }
+}</code></pre>
+            </div>
+            
+        </details>
+
+        <details>
+            <summary><strong>04. JSON Schema</strong></summary>
+            <p>Schema is like a "contract" or blueprint. It validates that the data you receive matches what you expect.</p>
+            
+            <div style="display: flex; gap: 10px;">
+                <div style="flex:1">
+                    <strong>The Schema (Rules):</strong>
+                    <pre class="dark-code" style="font-size: 0.8em;">
+"age": {
+    "type": "integer",
+    "minimum": 18
+}</pre>
+                </div>
+                <div style="flex:1">
+                    <strong>The Data:</strong>
+                    <pre class="dark-code" style="font-size: 0.8em;">
+"age": 12 
+// ❌ Error: Must be >= 18</pre>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary><strong>05. JavaScript Usage</strong></summary>
+            <p>The two most important methods in JavaScript:</p>
+            <table style="width:100%; border-collapse: collapse; border: 1px solid #999;">
+                <tr style="background:#ccc;"><th>Method</th><th>Direction</th><th>Example</th></tr>
+                <tr>
+                    <td><code>JSON.parse()</code></td>
+                    <td>String &rarr; Object</td>
+                    <td><code>const obj = JSON.parse(str);</code></td>
+                </tr>
+                <tr>
+                    <td><code>JSON.stringify()</code></td>
+                    <td>Object &rarr; String</td>
+                    <td><code>const str = JSON.stringify(data);</code></td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary><strong>06. Practical Exercise: Sports Center</strong></summary>
+            
+            <p><strong>Goal:</strong> Convert this hierarchy into JSON.</p>
+            <pre>
+Sports Center
+├── Name: "City Sports Complex"
+├── Facilities: ["Pool", "Gym"]
+└── Staff
+    ├── ID: "T001" (Name: Mike)
+    └── ID: "T002" (Name: Sarah)</pre>
+            <p><strong>Challenge:</strong> Write the JSON Schema to ensure "Facilities" is always an Array and ID is a String.</p>
+        </details>
+
+    </div>
+    
+    <div class="window-footer">
+        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
     </div>
 </div>
 
+<script>
+    // --- 1. JSON Validator Logic ---
+    function validateJSON() {
+        const input = document.getElementById('inputJson').value;
+        const output = document.getElementById('outputJson');
+        const status = document.getElementById('statusIndicator');
+
+        if(input.trim() === "") {
+            output.value = "";
+            status.className = "status-bar";
+            status.innerText = "Waiting for input...";
+            return;
+        }
+
+        try {
+            const parsed = JSON.parse(input);
+            output.value = JSON.stringify(parsed, null, 4); // 4 spaces indentation
+            status.className = "status-bar valid";
+            status.innerText = "✓ Valid JSON";
+        } catch (e) {
+            output.value = ""; // Clear output on error
+            status.className = "status-bar invalid";
+            status.innerText = "❌ " + e.message;
+        }
+    }
+
+    // --- 2. Tab Switcher Logic ---
+    const dataFormats = {
+        json: `{\n  "employee": {\n    "name": "John Doe",\n    "role": "Developer",\n    "active": true\n  }\n}`,
+        xml: `<employee>\n  <name>John Doe</name>\n  <role>Developer</role>\n  <active>true</active>\n</employee>`,
+        yaml: `employee:\n  name: John Doe\n  role: Developer\n  active: true`
+    };
+
+    function switchTab(format) {
+        // Update Buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Update Code
+        document.getElementById('compareCode').innerText = dataFormats[format];
+    }
+
+    // Run validation once on load to show the error in the example
+    window.onload = validateJSON;
+</script>
 </body>
 </html>

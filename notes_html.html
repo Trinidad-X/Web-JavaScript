@@ -3,30 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
+    <title>HTML5 Interactive Notes</title>
     <link rel="stylesheet" href="/styles/notes.css">
+    <style>
+        /* Interactive Styles */
+        body, html { overflow: hidden; height: 100%; margin: 0; }
+        .window { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; }
+        
+        /* Live Editor Styles */
+        .editor-container {
+            display: flex;
+            gap: 10px;
+            height: 200px;
+            margin: 10px 0;
+            border: 2px solid #808080;
+            padding: 5px;
+            background: #c0c0c0;
+        }
+        .code-input {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            padding: 5px;
+            resize: none;
+            border: 2px inset white;
+        }
+        .live-preview {
+            flex: 1;
+            background: white;
+            padding: 10px;
+            border: 2px inset white;
+            overflow: auto;
+        }
+
+        /* Tree Diagram Styles */
+        .dom-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #999;
+            margin: 10px 0;
+        }
+        .node {
+            border: 1px solid #000;
+            padding: 5px 10px;
+            margin: 5px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .branch { display: flex; justify-content: center; gap: 20px; }
+        .connector { width: 1px; height: 10px; background: #000; margin: 0 auto; }
+
+        /* Input Grid */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #999;
+        }
+        .input-item { background: white; padding: 5px; border: 1px solid #ccc; font-size: 0.9em; }
+        
+        table { border-collapse: collapse; width: 100%; background: white; margin-top: 10px; }
+        th, td { border: 1px solid #808080; padding: 4px; text-align: left; font-size: 12px; }
+        th { background: #c0c0c0; }
+    </style>
 </head>
 <body>
-
 <div class="window">
     <div class="title-bar">
         <div class="title-bar-text">Notes Viewer</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
+        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
         </div>
     </div>
     
     <div class="window-body">
         <div class="content-area">
-             <p>Topic Title...</p>
+            <h2>HTML5 Overview</h2>
+            
+            <details>
+                <summary><strong>01 History & Context</strong></summary>
+                
+                <p><strong>Timeline Highlights:</strong></p>
+                <ul>
+                    <li>1991: First HTML description (Berners-Lee).</li>
+                    <li>2008: HTML5 First Stable Draft (The modern era).</li>
+                    <li>2014: HTML5 is W3C Recommendation.</li>
+                </ul>
+                <p><strong>The "Big Three":</strong></p>
+                <div style="display: flex; justify-content: space-around; background: #ddd; padding: 10px;">
+                    <div><strong>HTML</strong><br>Structure<br>(Noun)</div>
+                    <div>+</div>
+                    <div><strong>CSS</strong><br>Presentation<br>(Adjective)</div>
+                    <div>+</div>
+                    <div><strong>JS</strong><br>Behavior<br>(Verb)</div>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>02 Structure & Semantics</strong></summary>
+                <p>HTML5 introduced semantic tags to describe <em>what</em> content is, not just how it looks.</p>
+                
+                
+
+                <div class="dom-tree">
+                    <div class="node">&lt;body&gt;</div>
+                    <div class="connector" style="height: 15px;"></div>
+                    <div class="branch">
+                        <div style="text-align:center">
+                            <div class="node">&lt;header&gt;</div>
+                            <div class="connector"></div>
+                            <div class="node">&lt;nav&gt;</div>
+                        </div>
+                        <div style="text-align:center">
+                            <div class="node">&lt;main&gt;</div>
+                            <div class="connector"></div>
+                            <div class="branch">
+                                <div class="node">&lt;section&gt;</div>
+                                <div class="node">&lt;article&gt;</div>
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <div class="node">&lt;footer&gt;</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </details>
+
+            <details open>
+                <summary><strong>03 Text & Images (Live Playground)</strong></summary>
+                <p>Type in the left box to see the result on the right immediately.</p>
+                
+                <div class="editor-container">
+<textarea class="code-input" id="htmlInput" oninput="updatePreview()">
+<h3>Hello World!</h3>
+<p>This is <strong>bold</strong> and <em>italic</em>.</p>
+<hr>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
+<button>Click Me</button>
+</textarea>
+                    <div class="live-preview" id="htmlPreview"></div>
+                </div>
+                
+                <p><strong>Common Tags:</strong> <code>&lt;p&gt;</code> (Paragraph), <code>&lt;br&gt;</code> (Break), <code>&lt;img src="..."&gt;</code>, <code>&lt;a href="..."&gt;</code> (Link).</p>
+            </details>
+
+            <details>
+                <summary><strong>04 Tables</strong></summary>
+                <p>Used for structured data (not layout!).</p>
+                <p><strong>Key Attributes:</strong> <code>colspan</code> (merge columns), <code>rowspan</code> (merge rows).</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>&lt;tr&gt;</td><td>Table Row</td></tr>
+                        <tr><td>&lt;th&gt;</td><td>Table Header (Bold/Centered)</td></tr>
+                        <tr><td>&lt;td&gt;</td><td>Table Data (Standard cell)</td></tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <details>
+                <summary><strong>05 Forms & Inputs</strong></summary>
+                <p><strong>The Mechanism:</strong> Data is sent from Client to Server.</p>
+                
+                
+                <div class="interactive-box" style="background: #e0e0e0; padding: 10px; border: 2px inset white;">
+                    <p><strong>Input Types Gallery (Visual Reference):</strong></p>
+                    <div class="input-grid">
+                        <div class="input-item">
+                            <label>color:</label> <input type="color">
+                        </div>
+                        <div class="input-item">
+                            <label>date:</label> <input type="date">
+                        </div>
+                        <div class="input-item">
+                            <label>range:</label> <input type="range">
+                        </div>
+                        <div class="input-item">
+                            <label>number:</label> <input type="number" placeholder="123">
+                        </div>
+                        <div class="input-item">
+                            <label>checkbox:</label> <input type="checkbox">
+                        </div>
+                        <div class="input-item">
+                            <label>radio:</label> <input type="radio">
+                        </div>
+                    </div>
+                </div>
+
+                <p><strong>GET vs POST:</strong></p>
+                <ul>
+                    <li><strong>GET:</strong> Data in URL (Insecure, book-markable). Good for search.</li>
+                    <li><strong>POST:</strong> Data in Body (Secure, hidden). Good for passwords.</li>
+                </ul>
+            </details>
+
+            <details>
+                <summary><strong>06 Multimedia</strong></summary>
+                <p>Native support for Audio and Video without Flash.</p>
+                <pre>&lt;video controls poster="thumb.jpg"&gt;
+  &lt;source src="movie.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</pre>
+                <p>Attributes: <code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>.</p>
+            </details>
+
         </div>
         
         <div class="window-footer">
-            <button class="win98-btn">Close</button>
+            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
+<script>
+    function closeWindow() {
+        document.getElementById('mainWindow').style.display = 'none';
+    }
+
+    function updatePreview() {
+        const input = document.getElementById('htmlInput').value;
+        document.getElementById('htmlPreview').innerHTML = input;
+    }
+
+    // Initialize preview on load
+    updatePreview();
+</script>
 </body>
 </html>

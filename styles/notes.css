@@ -328,3 +328,85 @@ summary {
     padding-top: 8px;          /* Adds space between content and button */
     margin-top: auto;          /* Crucial: Pushes footer to the very bottom */
 }
+
+/* Specific styles for the interactive tools */
+        .interactive-box {
+            background: #e0e0e0;
+            border: 1px inset white;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .tool-row {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tool-row input {
+            padding: 2px 5px;
+            border: 1px inset #fff;
+        }
+        .console-output {
+            background: black;
+            color: lime;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            height: 100px;
+            overflow-y: auto;
+            border: 2px inset #808080;
+            margin-top: 5px;
+        }
+
+/* Specific styles for interactive elements within the notes */
+        .interactive-box {
+            background: #e0e0e0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Tahoma', sans-serif;
+        }
+        .tool-row {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tool-row input {
+            padding: 3px;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+        .console-output {
+            background: black;
+            color: lime;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            height: 120px;
+            overflow-y: auto;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        .output-label {
+            font-style: italic; 
+            color: #000080; 
+            margin-top: 5px;
+            min-height: 1.2em;
+        }
+        /* Override body/window styles from CSS to ensure full screen per previous request */
+        body, html {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+        }
+        .window {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }

@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Interactive Notes</title>
+    <link rel="stylesheet" href="/styles/styles.css"> 
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trinidad Diez - Notes</title>
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
     <link rel="stylesheet" href="/styles/notes.css">
@@ -13,13 +22,97 @@
     <div class="title-bar">
         <div class="title-bar-text">Notes Viewer</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
+        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
         </div>
     </div>
     
     <div class="window-body">
         <div class="content-area">
-             <p>Topic Title...</p>
+            <h2>JavaScript: Fundamentals and Modern Syntax</h2>
+            
+            <details>
+                <summary><strong>01 Including JS</strong></summary>
+                <p>HTML provides the <code>&lt;script&gt;</code> tag. Best practice is using external files with the <code>defer</code> attribute.</p>
+                <pre>&lt;script src="scripts/app.js" defer&gt;&lt;/script&gt;</pre>
+            </details>
+            
+            <details open>
+                <summary><strong>02 Interaction (Modals)</strong></summary>
+                <div class="interactive-box">
+                    <p>Click the buttons to test native browser modals:</p>
+                    <button class="win98-btn" onclick="alert('This is a native alert.')">Alert</button>
+                    <button class="win98-btn" onclick="runConfirm()">Confirm</button>
+                    <button class="win98-btn" onclick="runPrompt()">Prompt</button>
+                    <div id="modal-result" class="output-label">Result: Waiting for input...</div>
+                </div>
+            </details>
+            
+            <details>
+                <summary><strong>03 Variables & Data Types</strong></summary>
+                <p>Variables are containers for data values using <code>let</code> (changeable) or <code>const</code> (constant).</p>
+                
+                <div class="interactive-box">
+                    <p><strong>Interactive Type Checker:</strong></p>
+                    <div class="tool-row">
+                        <input type="text" id="typeInput" placeholder="Type something..." onkeyup="checkType()">
+                        <span id="typeOutput">Type: string</span>
+                    </div>
+                    <p style="font-size:11px; color:#555;">(Note: HTML inputs are technically always strings until parsed)</p>
+                </div>
+
+                <p><strong>Common Types:</strong></p>
+                <ul>
+                    <li><code>String</code>: "Hello World"</li>
+                    <li><code>Number</code>: 42, 3.14</li>
+                    <li><code>Boolean</code>: true, false</li>
+                </ul>
+            </details>
+            
+            <details>
+                <summary><strong>04 Operators</strong></summary>
+                <div class="interactive-box">
+                    <p><strong>Strict (===) vs Loose (==) Equality</strong></p>
+                    <p>Comparing number <code>5</code> against string <code>"5"</code>:</p>
+                    <ul>
+                        <li><code>5 == "5"</code> returns <strong>true</strong> (value match)</li>
+                        <li><code>5 === "5"</code> returns <strong>false</strong> (type mismatch)</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details>
+                <summary><strong>05 String Methods</strong></summary>
+                <div class="interactive-box">
+                    <p>Manipulate the text below:</p>
+                    <input type="text" id="strInput" value="  JavaScript  " style="width: 200px;">
+                    <div style="margin-top:10px;">
+                        <button class="win98-btn" onclick="doStr('upper')">.toUpperCase()</button>
+                        <button class="win98-btn" onclick="doStr('lower')">.toLowerCase()</button>
+                        <button class="win98-btn" onclick="doStr('trim')">.trim()</button>
+                        <button class="win98-btn" onclick="doStr('length')">.length</button>
+                    </div>
+                    <p class="output-label" id="strOutput">Output: "  JavaScript  "</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary><strong>06 Control Structures (Loops)</strong></summary>
+                <div class="interactive-box">
+                    <p>Run loops and view output in the virtual console:</p>
+                    <button class="win98-btn" onclick="runLoop('for')">Run For Loop (0-4)</button>
+                    <button class="win98-btn" onclick="runLoop('while')">Run While Loop (x*2)</button>
+                    <button class="win98-btn" onclick="clearConsole()">Clear Console</button>
+                    
+                    <div id="virtual-console" class="console-output">> Virtual Console Ready...</div>
+                </div>
+            </details>
+            
+            <details>
+                <summary><strong>07 Debugging</strong></summary>
+                <p>Use <code>console.log()</code> to print variables to the developer tools (F12).</p>
+                <pre>let x = 10;
+console.log("Value of x:", x);</pre>
+            </details>
         </div>
         
         <div class="window-footer">
@@ -27,6 +120,98 @@
         </div>
     </div>
 </div>
+
+</body>
+</html>
+</div>
+
+<script>
+    // --- Window Control ---
+    function closeWindow() {
+        document.getElementById('mainWindow').style.display = 'none';
+        // Note: window.close() is usually blocked by browsers if script didn't open the tab
+    }
+
+    // --- 02 Modals ---
+    function runConfirm() {
+        let result = confirm("Click OK or Cancel");
+        document.getElementById('modal-result').innerText = "You clicked: " + result;
+    }
+    
+    function runPrompt() {
+        let name = prompt("What is your name?");
+        if (name === null) {
+            document.getElementById('modal-result').innerText = "You cancelled the prompt.";
+        } else {
+            document.getElementById('modal-result').innerText = "Hello, " + name + "!";
+        }
+    }
+
+    // --- 03 Type Checker ---
+    function checkType() {
+        let val = document.getElementById('typeInput').value;
+        let type = "string"; // Inputs are always strings in HTML
+        
+        // Simulating JS type detection for demo purposes
+        if (val === "") {
+            type = "empty string";
+        } else if (!isNaN(val) && val.trim() !== "") {
+            type = "string (but looks like a number)";
+        }
+        
+        document.getElementById('typeOutput').innerText = "Type: " + type;
+    }
+
+    // --- 05 String Methods ---
+    function doStr(action) {
+        let input = document.getElementById('strInput').value;
+        let output = "";
+        
+        switch(action) {
+            case 'upper': output = input.toUpperCase(); break;
+            case 'lower': output = input.toLowerCase(); break;
+            case 'trim': output = input.trim(); break;
+            case 'length': output = input.length; break;
+        }
+        
+        // Wrap strings in quotes for visual clarity, unless it's a number (length)
+        if (typeof output === 'string') {
+            document.getElementById('strOutput').innerText = '"' + output + '"';
+        } else {
+            document.getElementById('strOutput').innerText = output;
+        }
+    }
+
+    // --- 06 Loops (Virtual Console) ---
+    const vConsole = document.getElementById('virtual-console');
+    
+    function log(msg) {
+        vConsole.innerHTML += `<div>> ${msg}</div>`;
+        vConsole.scrollTop = vConsole.scrollHeight; // Auto scroll
+    }
+
+    function clearConsole() {
+        vConsole.innerHTML = "<div>> Console cleared.</div>";
+    }
+
+    function runLoop(type) {
+        if (type === 'for') {
+            log("--- Starting FOR Loop ---");
+            for(let i = 0; i < 5; i++) {
+                log(`i is currently: ${i}`);
+            }
+            log("--- End Loop ---");
+        } else if (type === 'while') {
+            log("--- Starting WHILE Loop (x * 2) ---");
+            let x = 10;
+            while(x < 100) {
+                log(`x is: ${x}`);
+                x = x * 2;
+            }
+            log("--- End Loop ---");
+        }
+    }
+</script>
 
 </body>
 </html>

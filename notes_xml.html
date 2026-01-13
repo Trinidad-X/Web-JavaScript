@@ -3,29 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
+    <title>XML Interactive Notes</title>
     <link rel="stylesheet" href="/styles/notes.css">
+    <style>
+        /* Shared Interactive Styles */
+        body, html { overflow: hidden; height: 100%; margin: 0; }
+        .window { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; }
+        
+        .interactive-box {
+            background: #e0e0e0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Tahoma', sans-serif;
+        }
+        .code-input {
+            width: 95%;
+            height: 80px;
+            font-family: 'Courier New', monospace;
+            background: white;
+            border: 2px inset #808080;
+            margin-bottom: 5px;
+        }
+        .status-bar {
+            background: #c0c0c0;
+            border: 1px inset white;
+            padding: 5px;
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #000080;
+        }
+        .error-msg { color: red; font-weight: bold; }
+        .success-msg { color: green; font-weight: bold; }
+        
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #808080; padding: 4px; text-align: left; font-size: 12px; }
+        th { background: #c0c0c0; }
+    </style>
 </head>
 <body>
 <div class="window">
     <div class="title-bar">
         <div class="title-bar-text">Notes Viewer</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
+        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
         </div>
     </div>
     
     <div class="window-body">
         <div class="content-area">
-             <p>Topic Title...</p>
+            <h2>XML Fundamentals</h2>
+            
+            <details open>
+                <summary><strong>01 Syntax & Elements</strong></summary>
+                <p>XML stores data in a hierarchical format. Unlike HTML, <strong>you define your own tags</strong>.</p>
+                
+                
+                <div class="interactive-box">
+                    <p><strong>Basic Rules:</strong></p>
+                    <ul>
+                        <li>Must have a Closing Tag (or be self-closing `&lt;tag/&gt;`)</li>
+                        <li>Case Sensitive (`&lt;Tag&gt;` is not `&lt;tag&gt;`)</li>
+                        <li>Properly Nested</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>02 Tree Structure (The Root)</strong></summary>
+                <p>Every XML document must have exactly <strong>one root element</strong> that contains all others.</p>
+                
+                
+                <p><strong>Structure Example:</strong></p>
+                <pre>&lt;library&gt;          &lt;!-- Root --&gt;
+  &lt;book&gt;           &lt;!-- Child --&gt;
+    &lt;title&gt;Dune&lt;/title&gt; &lt;!-- Grandchild --&gt;
+  &lt;/book&gt;
+&lt;/library&gt;</pre>
+            </details>
+
+            <details>
+                <summary><strong>03 Well-Formedness Validator</strong></summary>
+                <div class="interactive-box">
+                    <p>Type XML below to check if it is "Well-Formed" (follows strict syntax rules).</p>
+                    <textarea id="xmlInput" class="code-input">&lt;note&gt;
+  &lt;to&gt;User&lt;/to&gt;
+  &lt;from&gt;Admin&lt;/from&gt;
+&lt;/note&gt;</textarea>
+                    <br>
+                    <button class="win98-btn" onclick="validateXML()">Check Syntax</button>
+                    <div id="validationResult" class="status-bar">Status: Ready to check...</div>
+                </div>
+                <p><strong>Common Errors:</strong> Forgetting a closing tag, overlapping tags, or having two root elements.</p>
+            </details>
+
+            <details>
+                <summary><strong>04 Attributes</strong></summary>
+                <p>Data can be stored as <strong>Child Elements</strong> or <strong>Attributes</strong>.</p>
+                
+                
+                <table style="margin-top:10px;">
+                    <tr>
+                        <th>As Attribute</th>
+                        <th>As Element</th>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;person id="501"&gt;</code></td>
+                        <td>
+<pre>&lt;person&gt;
+  &lt;id&gt;501&lt;/id&gt;</pre>
+                        </td>
+                    </tr>
+                </table>
+                <p><em>Note: Attributes cannot contain multiple values or tree structures. Elements are more flexible.</em></p>
+            </details>
+
+            <details>
+                <summary><strong>05 Entities & Special Characters</strong></summary>
+                <p>Characters like <code>&lt;</code> and <code>&amp;</code> break the parser. Use entities instead.</p>
+                
+                <div class="interactive-box">
+                    <p><strong>Entity Converter:</strong></p>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <input type="text" id="entityInput" placeholder="Type text with < or &" style="flex:1;">
+                        <button class="win98-btn" onclick="convertEntities()">Convert</button>
+                    </div>
+                    <p id="entityOutput" class="status-bar">Result: </p>
+                </div>
+
+                <table>
+                    <tr><th>Char</th><th>Entity</th></tr>
+                    <tr><td>&lt;</td><td><code>&amp;lt;</code></td></tr>
+                    <tr><td>&gt;</td><td><code>&amp;gt;</code></td></tr>
+                    <tr><td>&amp;</td><td><code>&amp;amp;</code></td></tr>
+                    <tr><td>"</td><td><code>&amp;quot;</code></td></tr>
+                    <tr><td>'</td><td><code>&amp;apos;</code></td></tr>
+                </table>
+            </details>
+
+            <details>
+                <summary><strong>06 Declaration & Comments</strong></summary>
+                <p>Optional first line defining version and encoding.</p>
+                <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</pre>
+                <p><strong>Comments:</strong> (Cannot be nested)</p>
+                <pre>&lt;!-- This is a comment --&gt;</pre>
+            </details>
+
         </div>
         
         <div class="window-footer">
-            <button class="win98-btn">Close</button>
+            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
+<script>
+    function closeWindow() {
+        document.getElementById('mainWindow').style.display = 'none';
+    }
+
+    // --- XML Validator Logic ---
+    function validateXML() {
+        const input = document.getElementById('xmlInput').value;
+        const resultBox = document.getElementById('validationResult');
+        
+        // Use browser's built-in DOMParser
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(input, "text/xml");
+        const parserError = xmlDoc.getElementsByTagName("parsererror");
+
+        if (parserError.length > 0) {
+            // Extract the error message
+            let msg = parserError[0].textContent;
+            // Clean up browser specific error text for brevity
+            msg = msg.split(':')[0] + " error."; 
+            resultBox.innerHTML = "<span class='error-msg'>INVALID:</span> " + "Check tags strictly.";
+            resultBox.title = parserError[0].textContent; // Tooltip full error
+        } else {
+            resultBox.innerHTML = "<span class='success-msg'>VALID:</span> The syntax is correct.";
+        }
+    }
+
+    // --- Entity Converter Logic ---
+    function convertEntities() {
+        const raw = document.getElementById('entityInput').value;
+        let converted = raw.replace(/&/g, "&amp;")
+                           .replace(/</g, "&lt;")
+                           .replace(/>/g, "&gt;")
+                           .replace(/"/g, "&quot;")
+                           .replace(/'/g, "&apos;");
+        
+        document.getElementById('entityOutput').innerText = "Result: " + converted;
+    }
+</script>
 </body>
 </html>

@@ -3,30 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
-    <link rel="stylesheet" href="/styles/notes.css">
+    <title>CSS3 Interactive Notes</title>
+    <style>
+        :root {
+            --win-gray: #c0c0c0;
+            --win-dark: #808080;
+            --win-light: #ffffff;
+            --win-blue: #000080;
+        }
+        body { background-color: #008080; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; margin: 0; overflow: hidden; }
+        
+        /* Window Chrome */
+        .window {
+            width: 90vw; height: 90vh;
+            margin: 5vh auto;
+            background: var(--win-gray);
+            border: 2px solid;
+            border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
+            display: flex; flex-direction: column;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+        }
+        .title-bar {
+            background: linear-gradient(90deg, var(--win-blue), #1084d0);
+            padding: 4px 8px;
+            display: flex; justify-content: space-between; align-items: center;
+            color: white; font-weight: bold; font-size: 14px;
+        }
+        .window-body {
+            flex: 1; padding: 10px; overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--win-dark) var(--win-gray);
+        }
+
+        /* Content Styling */
+        h2 { border-bottom: 2px solid var(--win-dark); color: #333; }
+        details { margin-bottom: 10px; border: 1px dotted #888; padding: 5px; background: #e0e0e0; }
+        summary { cursor: pointer; font-weight: bold; user-select: none; }
+        summary:hover { background: #d0d0d0; }
+        pre { background: #fff; padding: 10px; border: 1px inset; overflow-x: auto; }
+        code { font-family: 'Consolas', monospace; color: #d63384; background: #eee; padding: 2px 4px; }
+        
+        /* --- INTERACTIVE ELEMENTS --- */
+        
+        /* 1. Live Editor */
+        .playground { display: flex; gap: 10px; height: 200px; margin-top: 10px; }
+        .editor { flex: 1; resize: none; font-family: monospace; padding: 10px; border: 2px inset; }
+        .preview { flex: 1; background: white; border: 2px inset; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .preview-box { background: lightblue; padding: 20px; border: 1px solid blue; transition: all 0.3s ease; }
+
+        /* 2. Visual Box Model */
+        .box-viz-container { display: flex; justify-content: center; padding: 20px; }
+        .viz-margin { background: #f9cc9d; padding: 20px; border: 1px dashed orange; position: relative; }
+        .viz-border { background: #fde89c; padding: 5px; border: 1px solid black; }
+        .viz-padding { background: #c2eec1; padding: 20px; }
+        .viz-content { background: #a2ccf5; width: 100px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+        .label { position: absolute; font-size: 10px; font-weight: bold; top: 2px; left: 2px; }
+
+        /* 3. Position Grid */
+        .pos-controls { margin-bottom: 10px; padding: 5px; background: #ddd; }
+        .pos-stage { height: 150px; border: 2px inset white; background: white; position: relative; overflow: hidden; }
+        .pos-ghost { width: 50px; height: 50px; border: 2px dashed #ccc; position: absolute; top: 40px; left: 40px; }
+        .pos-box { width: 50px; height: 50px; background: tomato; color: white; display: flex; align-items: center; justify-content: center; font-size: 10px; top: 40px; left: 40px; border: 1px solid darkred; transition: background 0.3s; }
+
+    </style>
 </head>
 <body>
-
 <div class="window">
     <div class="title-bar">
         <div class="title-bar-text">Notes Viewer</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
-        </div>
+    <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
     </div>
     
     <div class="window-body">
-        <div class="content-area">
-             <p>Topic Title...</p>
-        </div>
         
-        <div class="window-footer">
-            <button class="win98-btn">Close</button>
-        </div>
+        <details open>
+            <summary><strong>01. Interactive Playground</strong> (Try it first!)</summary>
+            <p>Write CSS on the left to change the box on the right. Try changing color, border-radius, or rotation.</p>
+            <div class="playground">
+<textarea class="editor" id="cssInput" oninput="updatePlayground()">
+/* Edit me! */
+.preview-box {
+  background-color: hotpink;
+  color: white;
+  border-radius: 10px;
+  transform: rotate(-5deg);
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
+</textarea>
+                <div class="preview">
+                    <div class="preview-box" id="targetBox">Target Element</div>
+                </div>
+            </div>
+            <style id="dynamicStyle"></style>
+        </details>
+
+        <details>
+            <summary><strong>02. The Box Model (Visualized)</strong></summary>
+            <p>In CSS, every element is a box. The browser calculates size based on these layers:</p>
+            
+            <div class="box-viz-container">
+                <div class="viz-margin">
+                    <span class="label">Margin (Space outside)</span>
+                    <div class="viz-border">
+                        <div class="viz-padding">
+                             <div class="viz-content">Content</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul>
+                <li><strong>Content:</strong> The text or image.</li>
+                <li><strong>Padding:</strong> Space between content and border (Green).</li>
+                <li><strong>Border:</strong> The line around the padding (Yellow).</li>
+                <li><strong>Margin:</strong> Space outside the border (Orange).</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary><strong>03. Selectors & Specificity</strong></summary>
+            <p>When multiple rules apply to the same element, the one with higher "Specificity Score" wins.</p>
+            
+            <table style="width:100%; border-collapse: collapse; background: white; border: 1px solid #999;">
+                <tr style="background:#ccc;"><th>Selector</th><th>Score</th><th>Type</th></tr>
+                <tr><td><code>style="..."</code></td><td>1000</td><td>Inline Style</td></tr>
+                <tr><td><code>#id</code></td><td>0100</td><td>ID</td></tr>
+                <tr><td><code>.class</code></td><td>0010</td><td>Class / Pseudo-class</td></tr>
+                <tr><td><code>div</code> (tag)</td><td>0001</td><td>Element</td></tr>
+            </table>
+            <p><strong>Note:</strong> <code>!important</code> overrides everything but breaks maintainability.</p>
+        </details>
+
+        <details>
+            <summary><strong>04. Positioning System</strong></summary>
+            <p>Controls where an element sits in the document flow.</p>
+            
+            <div class="pos-controls">
+                <label><input type="radio" name="pos" onclick="setPos('static')" checked> Static (Default)</label>
+                <label><input type="radio" name="pos" onclick="setPos('relative')"> Relative</label>
+                <label><input type="radio" name="pos" onclick="setPos('absolute')"> Absolute</label>
+                <label><input type="radio" name="pos" onclick="setPos('fixed')"> Fixed</label>
+            </div>
+            <div class="pos-stage">
+                <div style="padding: 10px;">
+                    <p>Lorem ipsum text...</p>
+                    <p>Lorem ipsum text...</p>
+                    <p>Lorem ipsum text...</p>
+                    <p>Lorem ipsum text...</p>
+                </div>
+                <div class="pos-ghost">Ghost</div>
+                <div class="pos-box" id="moveBox">TARGET</div>
+            </div>
+            <p id="pos-desc" style="font-style: italic; margin-top: 5px;">Static: Acts normally. Top/Left properties ignored.</p>
+        </details>
+
+        <details>
+            <summary><strong>05. Flexbox & Grid</strong></summary>
+            <p>Modern Layout systems (replacing old "float" hacks).</p>
+            
+            <ul>
+                <li><strong>Flexbox:</strong> One-dimensional (Row OR Column). Good for navbars, centering.</li>
+                <li><strong>Grid:</strong> Two-dimensional (Rows AND Columns). Good for page skeletons.</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary><strong>06. Colors & Units</strong></summary>
+            <ul>
+                <li><strong>Hex:</strong> <code>#ff0000</code> (Red)</li>
+                <li><strong>RGB:</strong> <code>rgb(255, 0, 0)</code></li>
+                <li><strong>RGBA:</strong> <code>rgba(255, 0, 0, 0.5)</code> (50% opacity)</li>
+            </ul>
+            <p><strong>Relative Units (Recommended):</strong></p>
+            <ul>
+                <li><code>rem</code>: Relative to root HTML size (usually 16px).</li>
+                <li><code>em</code>: Relative to parent font size.</li>
+                <li><code>vh/vw</code>: Viewport Height/Width %.</li>
+            </ul>
+        </details>
+
     </div>
 </div>
 
+<script>
+    // Live Playground Logic
+    function updatePlayground() {
+        const css = document.getElementById('cssInput').value;
+        const styleTag = document.getElementById('dynamicStyle');
+        styleTag.innerHTML = css;
+    }
+
+    // Positioning Logic
+    function setPos(type) {
+        const box = document.getElementById('moveBox');
+        const desc = document.getElementById('pos-desc');
+        
+        box.style.position = type;
+        
+        if (type === 'static') {
+            box.style.top = 'auto';
+            box.style.left = 'auto';
+            desc.innerText = "Static: Natural flow. 'Top: 40px' is ignored.";
+            box.style.background = 'gray';
+        } else if (type === 'relative') {
+            box.style.top = '10px'; // Offset from ghost
+            box.style.left = '10px';
+            desc.innerText = "Relative: Offset relative to where it WOULD be (see ghost box).";
+            box.style.background = 'tomato';
+        } else if (type === 'absolute') {
+            box.style.top = '0px';
+            box.style.left = '0px';
+            desc.innerText = "Absolute: Removed from flow. Positioned relative to nearest positioned ancestor (the container).";
+            box.style.background = 'purple';
+        } else if (type === 'fixed') {
+            box.style.top = '50px';
+            box.style.right = '50px';
+            box.style.left = 'auto';
+            desc.innerText = "Fixed: Glued to the viewport glass. Won't scroll with content.";
+            box.style.background = 'red';
+        }
+    }
+</script>
 </body>
 </html>

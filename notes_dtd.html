@@ -3,30 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
+    <title>DTD Interactive Notes</title>
     <link rel="stylesheet" href="/styles/notes.css">
+    <style>
+        /* Shared Interactive Styles */
+        body, html { overflow: hidden; height: 100%; margin: 0; }
+        .window { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; }
+        
+        .interactive-box {
+            background: #e0e0e0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Tahoma', sans-serif;
+        }
+        .code-display {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border: 2px inset #808080;
+            margin-top: 5px;
+            white-space: pre-wrap;
+        }
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        select, input { padding: 3px; font-family: 'Tahoma', sans-serif; }
+        .explanation { font-style: italic; color: #000080; font-size: 0.9em; margin-top: 5px;}
+        
+        table { border-collapse: collapse; width: 100%; background: white; margin-top: 10px;}
+        th, td { border: 1px solid #808080; padding: 4px; text-align: left; font-size: 12px; }
+        th { background: #c0c0c0; }
+    </style>
 </head>
 <body>
-
 <div class="window">
     <div class="title-bar">
         <div class="title-bar-text">Notes Viewer</div>
         <div class="title-bar-controls">
-            <button aria-label="Close">X</button>
+        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
         </div>
     </div>
     
     <div class="window-body">
         <div class="content-area">
-             <p>Topic Title...</p>
+            <h2>DTD - Document Type Definition</h2>
+            
+            <details open>
+                <summary><strong>01 The Logic: Valid vs. Well-Formed</strong></summary>
+                
+                <p>XML requires structure. DTD provides the rules.</p>
+                <ul>
+                    <li><strong>Well-Formed:</strong> Syntactically correct (tags close, single root).</li>
+                    <li><strong>Valid:</strong> Adheres to a specific DTD (grammar).</li>
+                </ul>
+                <div class="interactive-box">
+                    <p><strong>Equation:</strong></p>
+                    <p style="text-align:center; font-weight:bold; font-family:'Courier New'">DATA + STRUCTURE = INFORMATION</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary><strong>02 Element Definitions (Builder)</strong></summary>
+                
+                <p>Define what elements are allowed inside others using <strong>Quantifiers</strong>.</p>
+                
+                <div class="interactive-box">
+                    <p><strong>DTD Rule Builder:</strong></p>
+                    <div class="control-panel">
+                        <label>Parent:</label>
+                        <input type="text" id="parentEl" value="Library" style="width:60px;">
+                        <label>Child:</label>
+                        <input type="text" id="childEl" value="Book" style="width:60px;">
+                        <label>Rule:</label>
+                        <select id="quantifierSelect" onchange="updateElementRule()">
+                            <option value="">(None) Exactly One (1)</option>
+                            <option value="?">? Zero or One (0..1)</option>
+                            <option value="*">* Zero or More (0..n)</option>
+                            <option value="+">+ One or More (1..n)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="code-display" id="elementOutput">&lt;!ELEMENT Library (Book)&gt;</div>
+                    <div class="explanation" id="elementExplain">Logic: The Library must contain exactly one Book.</div>
+                </div>
+
+                <p><strong>Connectors:</strong></p>
+                <ul>
+                    <li><code>,</code> (Comma) = Sequence (And then...)</li>
+                    <li><code>|</code> (Pipe) = Choice (Or...)</li>
+                </ul>
+            </details>
+            
+            <details>
+                <summary><strong>03 Attributes (ATTLIST)</strong></summary>
+                <p>Attributes add metadata to elements. You must define their <strong>Type</strong> and <strong>Obligation</strong>.</p>
+                
+                <div class="interactive-box">
+                    <p><strong>Attribute Simulator:</strong></p>
+                    <div class="control-panel">
+                        <label>Attribute:</label> <input type="text" value="id" readonly style="width:30px; background:#ddd;">
+                        <select id="obligationSelect" onchange="updateAttributeRule()">
+                            <option value="#REQUIRED">#REQUIRED</option>
+                            <option value="#IMPLIED">#IMPLIED</option>
+                            <option value="#FIXED">#FIXED</option>
+                        </select>
+                    </div>
+                    <div class="code-display" id="attOutput">&lt;!ATTLIST item id CDATA #REQUIRED&gt;</div>
+                    <div class="explanation" id="attExplain">XML Result: &lt;item id="123"&gt; (You MUST include the ID)</div>
+                </div>
+
+                <table>
+                    <tr><th>Type</th><th>Description</th></tr>
+                    <tr><td>CDATA</td><td>Standard text (Character Data)</td></tr>
+                    <tr><td>ID / IDREF</td><td>Unique Identifier / Reference to ID</td></tr>
+                    <tr><td>(A|B)</td><td>Enumeration (Must be A or B)</td></tr>
+                </table>
+            </details>
+            
+            <details>
+                <summary><strong>04 Internal vs External</strong></summary>
+                
+                <p><strong>1. Internal:</strong> Defined inside the XML file.</p>
+                <pre>&lt;!DOCTYPE root [ 
+  &lt;!ELEMENT root (#PCDATA)&gt; 
+]&gt;</pre>
+                
+                <p><strong>2. External (Recommended):</strong> Separate file.</p>
+                <pre>&lt;!DOCTYPE root SYSTEM "rules.dtd"&gt;</pre>
+            </details>
+
+            <details>
+                <summary><strong>05 Entities</strong></summary>
+                <p>Variables for text. Used to avoid repetition or handle special characters.</p>
+                <pre>&lt;!ENTITY company "Acme Corp Global"&gt;</pre>
+                <p>Usage in XML: <code>&copyright; &company;</code></p>
+            </details>
         </div>
         
         <div class="window-footer">
-            <button class="win98-btn">Close</button>
+            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
+<script>
+    function closeWindow() {
+        document.getElementById('mainWindow').style.display = 'none';
+    }
+
+    // --- Element Builder Logic ---
+    function updateElementRule() {
+        const p = document.getElementById('parentEl').value;
+        const c = document.getElementById('childEl').value;
+        const q = document.getElementById('quantifierSelect').value;
+        const display = document.getElementById('elementOutput');
+        const explain = document.getElementById('elementExplain');
+
+        display.innerText = `<!ELEMENT ${p} (${c}${q})>`;
+
+        let text = "";
+        switch(q) {
+            case "": text = `The ${p} must contain EXACTLY ONE ${c}.`; break;
+            case "?": text = `The ${p} can contain ZERO or ONE ${c} (Optional).`; break;
+            case "*": text = `The ${p} can contain ZERO, ONE, or MANY ${c}s.`; break;
+            case "+": text = `The ${p} must contain AT LEAST ONE ${c} (but can have more).`; break;
+        }
+        explain.innerText = "Logic: " + text;
+    }
+
+    // --- Attribute Simulator Logic ---
+    function updateAttributeRule() {
+        const type = document.getElementById('obligationSelect').value;
+        const display = document.getElementById('attOutput');
+        const explain = document.getElementById('attExplain');
+        
+        let code = `<!ATTLIST item id CDATA ${type}`;
+        if(type === "#FIXED") code += ' "001"';
+        code += ">";
+        
+        display.innerText = code;
+
+        let text = "";
+        switch(type) {
+            case "#REQUIRED": text = `<item id="val"> (Attribute is MANDATORY)`; break;
+            case "#IMPLIED": text = `<item> OR <item id="val"> (Attribute is OPTIONAL)`; break;
+            case "#FIXED": text = `<item id="001"> (Value is CONSTANT, cannot be changed)`; break;
+        }
+        explain.innerText = "XML Result: " + text;
+    }
+</script>
 </body>
 </html>
