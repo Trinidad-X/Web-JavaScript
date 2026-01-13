@@ -1,89 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Web JavaScript</title>
+    <title>Trinidad Diez - Web Web-Markup and Programming </title>
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
+
 <body>
 
     <div id="bsod" onclick="reboot()">
-        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be
+            terminated.</p>
         <br>
         <p style="text-align: center;">Press any key to continue <span class="blink">_</span></p>
     </div>
 
     <div class="desktop" id="desktop-bg" onclick="handleDesktopClick()">
-        
+
         <div class="desktop-icon" onclick="openWindow('win-about', 'About Me.txt', 'computer_explorer-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png') no-repeat center/contain;">
+            </div>
             <span>About Me.txt</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-terminal', 'Terminal.exe', 'console_prompt-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png') no-repeat center/contain;">
+            </div>
             <span>Terminal.exe</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-github', 'GitHub.exe', 'msie2-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/msie2-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/msie2-0.png') no-repeat center/contain;">
+            </div>
             <span>GitHub.exe</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-md', 'Markdown.md', 'template_empty-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/template_empty-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/template_empty-0.png') no-repeat center/contain;">
+            </div>
             <span>Markdown.md</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-html', 'index.html', 'html-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/html-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/html-0.png') no-repeat center/contain;">
+            </div>
             <span>index.html</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-css', 'styles.css', 'script-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/script-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/script-0.png') no-repeat center/contain;">
+            </div>
             <span>styles.css</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-xml', 'Data.xml', 'xml-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/xml-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/xml-0.png') no-repeat center/contain;">
+            </div>
             <span>Data.xml</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-dtd', 'Rules.dtd', 'settings_gear-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/settings_gear-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/settings_gear-0.png') no-repeat center/contain;">
+            </div>
             <span>Rules.dtd</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-xsl', 'Style.xsl', 'paint_file-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/paint_file-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/paint_file-0.png') no-repeat center/contain;">
+            </div>
             <span>Style.xsl</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-json', 'Data.json', 'chm-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/chm-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/chm-0.png') no-repeat center/contain;">
+            </div>
             <span>Data.json</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-dom', 'DOM_Tree.js', 'network_cool_two_pcs-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png') no-repeat center/contain;">
+            </div>
             <span>DOM_Tree.js</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-m04', 'M04_Notes.doc', 'directory_open_file_mydocs-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png') no-repeat center/contain;">
+            </div>
             <span>M04_Notes.doc</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-m09-1', 'Basics.js', 'notepad-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;">
+            </div>
             <span>Basics.js</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-m09-2', 'Func.js', 'notepad-0.png')">
-            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;"></div>
+            <div class="icon-box"
+                style="background: url('https://win98icons.alexmeub.com/icons/png/notepad-5.png') no-repeat center/contain;">
+            </div>
             <span>Func.js</span>
         </div>
 
@@ -92,7 +123,8 @@
     <div id="win-terminal" class="window win98-border" style="top: 15%; left: 55%; width: 550px; height: 400px;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-terminal')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png"
+                    style="width:16px; height:16px;">
                 Terminal.exe
             </div>
             <div class="title-bar-controls">
@@ -105,12 +137,16 @@
                 <p>Linux Terminal [Version 1.0.1]</p>
                 <p>(c) 2026 Corporation. All rights reserved.</p>
                 <br>
-                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">help --verbose</span></p>
+                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">help
+                        --verbose</span></p>
                 <br>
                 <p><strong>--- FILE SYSTEM COMMANDS ---</strong></p>
-                <p><span style="color:white;">pwd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Working Directory (Where am I?)</p>
-                <p><span style="color:white;">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List files in current directory</p>
-                <p><span style="color:white;">ls -a</span>&nbsp;&nbsp;&nbsp;&nbsp;List all files (including hidden ones)</p>
+                <p><span style="color:white;">pwd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Working Directory
+                    (Where am I?)</p>
+                <p><span style="color:white;">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List files in current
+                    directory</p>
+                <p><span style="color:white;">ls -a</span>&nbsp;&nbsp;&nbsp;&nbsp;List all files (including hidden ones)
+                </p>
                 <p><span style="color:white;">cd [dir]</span>&nbsp;Change Directory (e.g., cd Documents)</p>
                 <p><span style="color:white;">cd ..</span>&nbsp;&nbsp;&nbsp;&nbsp;Go up one directory level</p>
                 <br>
@@ -120,19 +156,23 @@
                 <p><span style="color:white;">cp [A][B]</span> Copy file A to location B</p>
                 <p><span style="color:white;">mv [A][B]</span> Move file A to B (also used to Rename)</p>
                 <p><span style="color:white;">rm [file]</span> Remove (delete) a file</p>
-                <p><span style="color:white;">rm -r</span>&nbsp;&nbsp;&nbsp;&nbsp;Remove directory and contents (Recursive)</p>
+                <p><span style="color:white;">rm -r</span>&nbsp;&nbsp;&nbsp;&nbsp;Remove directory and contents
+                    (Recursive)</p>
                 <br>
                 <p><strong>--- SYSTEM ---</strong></p>
                 <p><span style="color:white;">grep</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for text inside files</p>
-                <p><span style="color:white;">chmod</span>&nbsp;&nbsp;&nbsp;&nbsp;Change file permissions (Read/Write/Exec)</p>
-                <p><span style="color:white;">sudo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SuperUser DO (Execute as Admin)</p>
+                <p><span style="color:white;">chmod</span>&nbsp;&nbsp;&nbsp;&nbsp;Change file permissions
+                    (Read/Write/Exec)</p>
+                <p><span style="color:white;">sudo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SuperUser DO (Execute as Admin)
+                </p>
                 <br>
                 <p><span class="terminal-prompt">user@localhost:~$</span> <span class="blink">_</span></p>
             </div>
         </div>
     </div>
 
-    <div id="win-github" class="window win98-border" style="top: 10%; left: 15%; width: 480px; height: 380px; display: none;">
+    <div id="win-github" class="window win98-border"
+        style="top: 10%; left: 15%; width: 480px; height: 380px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-github')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/msie2-0.png" style="width:16px; height:16px;">
@@ -146,29 +186,33 @@
         <div class="window-body">
             <div class="content-area win98-inset">
                 <h2>Git & GitHub</h2>
-                
-                <p><strong>GitHub</strong> is a cloud platform for hosting code, allowing multiple developers to work together using <strong>Git</strong> (Version Control).</p>
-                
+
+                <p><strong>GitHub</strong> is a cloud platform for hosting code, allowing multiple developers to work
+                    together using <strong>Git</strong> (Version Control).</p>
+
                 <h3>Key Concepts:</h3>
                 <ul>
                     <li><strong>Repository (Repo):</strong> The folder where your project and its history lives.</li>
                     <li><strong>Commit:</strong> A save point in your history. Like a checkpoint in a game.</li>
                     <li><strong>Push:</strong> Uploading your local commits to the Cloud (GitHub).</li>
                     <li><strong>Pull:</strong> Downloading changes from GitHub to your computer.</li>
-                    <li><strong>Branch:</strong> A parallel version of the code to test new features without breaking the main site.</li>
+                    <li><strong>Branch:</strong> A parallel version of the code to test new features without breaking
+                        the main site.</li>
                 </ul>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_github.html'">Notes</button>
-                <button class="win98-btn">My Repos</button>
+                <a href="https://github.com/Trinidad-X?tab=repositories"><button class="win98-btn">My Repos</button></a>
             </div>
         </div>
     </div>
 
-    <div id="win-md" class="window win98-border" style="top: 12%; left: 15%; width: 450px; height: 350px; display: none;">
+    <div id="win-md" class="window win98-border"
+        style="top: 12%; left: 15%; width: 450px; height: 350px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-md')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/template_empty-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/template_empty-0.png"
+                    style="width:16px; height:16px;">
                 Markdown.md
             </div>
             <div class="title-bar-controls">
@@ -178,11 +222,49 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset" style="font-family: 'Courier New', monospace;">
-                <h2>Markdown Syntax</h2>
-                <p># Heading 1<br>## Heading 2</p>
-                <p>**Bold Text**<br>*Italic Text*</p>
-                <hr>
-                <p>Status: Learned</p>
+                <h1>What is Markdown?</h1>
+
+                <p>
+                    <strong>Markdown</strong> is a lightweight markup language used to format plain text.
+                    It allows writers to add structure—such as headings, lists, links, and code—using
+                    simple, readable symbols.
+                </p>
+
+                <h2>Why Use Markdown?</h2>
+                <ul>
+                    <li>Easy to read and write</li>
+                    <li>Works in plain text editors</li>
+                    <li>Converts easily to HTML and other formats</li>
+                    <li>Widely supported (GitHub, documentation tools, note apps)</li>
+                </ul>
+
+                <h2>Common Markdown Syntax</h2>
+                <ul>
+                    <li><strong>Headings:</strong> <code># Heading</code></li>
+                    <li><strong>Bold:</strong> <code>**bold text**</code></li>
+                    <li><strong>Italic:</strong> <code>*italic text*</code></li>
+                    <li><strong>Lists:</strong> <code>- Item</code></li>
+                    <li><strong>Links:</strong> <code>[Text](URL)</code></li>
+                    <li><strong>Code:</strong> <code>`inline code`</code></li>
+                </ul>
+
+                <h2>Where Markdown Is Used</h2>
+                <p>
+                    Markdown is commonly used for:
+                </p>
+                <ul>
+                    <li>README files</li>
+                    <li>Technical documentation</li>
+                    <li>Blogs and articles</li>
+                    <li>Notes and knowledge bases</li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    Markdown provides a simple way to format text without complex tools.
+                    Its simplicity and portability make it a popular choice for developers,
+                    writers, and content creators.
+                </p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_markdown.html'">Notes</button>
@@ -191,7 +273,8 @@
         </div>
     </div>
 
-    <div id="win-html" class="window win98-border" style="top: 18%; left: 25%; width: 450px; height: 350px; display: none;">
+    <div id="win-html" class="window win98-border"
+        style="top: 18%; left: 25%; width: 450px; height: 350px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-html')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/html-0.png" style="width:16px; height:16px;">
@@ -204,16 +287,50 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>HTML5 Structure</h2>
-                <h3>Semantic Tags</h3>
+                <h1>What is HTML5?</h1>
+
+                <p>
+                    <strong>HTML5</strong> is the latest version of the HyperText Markup Language (HTML),
+                    which is used to create and structure content on the web. It introduces new elements,
+                    APIs, and features that make web pages more interactive and multimedia-friendly.
+                </p>
+
+                <h2>Key Features of HTML5</h2>
                 <ul>
-                    <li>&lt;header&gt; &lt;nav&gt; &lt;main&gt;</li>
-                    <li>&lt;section&gt; &lt;article&gt; &lt;footer&gt;</li>
+                    <li>New semantic elements: <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>,
+                        <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>
+                    </li>
+                    <li>Built-in multimedia support: <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code></li>
+                    <li>Graphics and drawing: <code>&lt;canvas&gt;</code>, SVG integration</li>
+                    <li>Enhanced forms: new input types and attributes</li>
+                    <li>APIs for offline storage, geolocation, drag-and-drop, and more</li>
+                    <li>Improved accessibility and SEO through semantic tags</li>
                 </ul>
-                <h3>Forms</h3>
+
+                <h2>Why Use HTML5?</h2>
                 <ul>
-                    <li>Inputs, Labels, Validation</li>
+                    <li>Better structure and semantics for web content</li>
+                    <li>Supports multimedia without third-party plugins</li>
+                    <li>Compatible with modern browsers and devices</li>
+                    <li>Enables richer web applications and interactivity</li>
                 </ul>
+
+                <h2>Common HTML5 Elements</h2>
+                <ul>
+                    <li><code>&lt;header&gt;</code> - Page or section header</li>
+                    <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                    <li><code>&lt;section&gt;</code> - Thematic grouping of content</li>
+                    <li><code>&lt;article&gt;</code> - Self-contained content</li>
+                    <li><code>&lt;footer&gt;</code> - Footer content</li>
+                    <li><code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> - Media playback</li>
+                    <li><code>&lt;canvas&gt;</code> - Draw graphics via JavaScript</li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    HTML5 modernizes web development with semantic structure, multimedia support, and
+                    advanced APIs. It is essential for building interactive, accessible, and responsive
+                    websites today.
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_html.html'">Notes</button>
@@ -222,7 +339,8 @@
         </div>
     </div>
 
-    <div id="win-css" class="window win98-border" style="top: 20%; left: 28%; width: 450px; height: 350px; display: none;">
+    <div id="win-css" class="window win98-border"
+        style="top: 20%; left: 28%; width: 450px; height: 350px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-css')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/script-0.png" style="width:16px; height:16px;">
@@ -235,19 +353,49 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>CSS3 Styling</h2>
-                <h3>Layouts</h3>
+                <h1>What is CSS3?</h1>
+
+                <p>
+                    <strong>CSS3</strong> (Cascading Style Sheets Level 3) is the latest version of CSS,
+                    the language used to style and layout web pages. CSS3 allows developers to control
+                    the look and feel of websites, including colors, fonts, spacing, and responsive design.
+                </p>
+
+                <h2>Key Features of CSS3</h2>
                 <ul>
-                    <li>Display: Flex (Flexbox)</li>
-                    <li>Display: Grid</li>
-                    <li>Position: Absolute/Relative</li>
+                    <li>New selectors for targeting elements more precisely</li>
+                    <li>Advanced backgrounds and borders (gradients, rounded corners, shadows)</li>
+                    <li>Flexible box layout (<code>flexbox</code>) and grid layout (<code>CSS Grid</code>)</li>
+                    <li>Transitions and animations for smooth effects</li>
+                    <li>Media queries for responsive design</li>
+                    <li>Custom fonts with <code>@font-face</code></li>
                 </ul>
-                <h3>Design</h3>
+
+                <h2>Why Use CSS3?</h2>
                 <ul>
-                    <li>Box Model (Margin/Padding)</li>
-                    <li>Pseudo-classes (:hover)</li>
-                    <li>@media Queries</li>
+                    <li>Enhances visual design and user experience</li>
+                    <li>Enables responsive layouts for mobile and desktop</li>
+                    <li>Supports animation and interactive effects without JavaScript</li>
+                    <li>Improves maintainability by separating content (HTML) from presentation (CSS)</li>
                 </ul>
+
+                <h2>Common CSS3 Properties</h2>
+                <ul>
+                    <li><code>border-radius</code> – rounded corners</li>
+                    <li><code>box-shadow</code> – element shadows</li>
+                    <li><code>linear-gradient</code>, <code>radial-gradient</code> – background gradients</li>
+                    <li><code>transition</code> – smooth changes in styles</li>
+                    <li><code>transform</code> – rotate, scale, or move elements</li>
+                    <li><code>flex</code>, <code>grid</code> – layout control</li>
+                    <li><code>@media</code> – responsive design rules</li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    CSS3 is a powerful tool for designing modern web pages. With advanced styling,
+                    layout options, and animation features, it allows developers to create visually
+                    appealing and responsive websites that adapt to any device.
+                </p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_css.html'">Notes</button>
@@ -256,7 +404,8 @@
         </div>
     </div>
 
-    <div id="win-xml" class="window win98-border" style="top: 22%; left: 35%; width: 450px; height: 300px; display: none;">
+    <div id="win-xml" class="window win98-border"
+        style="top: 22%; left: 35%; width: 450px; height: 300px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-xml')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/xml-0.png" style="width:16px; height:16px;">
@@ -269,11 +418,46 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>eXtensible Markup Language</h2>
-                <p>Strict Syntax Rules.</p>
-                <div style="background:#eee; border:1px inset; padding:5px; font-family:monospace;">
-                    &lt;root&gt;...&lt;/root&gt;
-                </div>
+                <h1>What is XML?</h1>
+
+                <p>
+                    <strong>XML</strong> (eXtensible Markup Language) is a markup language designed to store,
+                    transport, and organize data in a structured, human-readable, and machine-readable format.
+                    Unlike HTML, which focuses on displaying data, XML focuses on describing and structuring data.
+                </p>
+
+                <h2>Key Features of XML</h2>
+                <ul>
+                    <li>Self-descriptive: uses tags to define the meaning of data</li>
+                    <li>Hierarchical structure with nested elements</li>
+                    <li>Platform-independent and widely supported for data exchange</li>
+                    <li>Extensible: you can create your own custom tags</li>
+                    <li>Can be validated using DTD or XML Schema for correctness</li>
+                </ul>
+
+                <h2>Why Use XML?</h2>
+                <ul>
+                    <li>To store and transport structured data across systems</li>
+                    <li>To separate data from presentation (unlike HTML)</li>
+                    <li>For configuration files, web services (SOAP), and APIs</li>
+                    <li>To ensure data is readable by both humans and machines</li>
+                </ul>
+
+                <h2>Common XML Syntax</h2>
+                <ul>
+                    <li>Elements: <code>&lt;name&gt;value&lt;/name&gt;</code></li>
+                    <li>Attributes: <code>&lt;person age="30"&gt;John&lt;/person&gt;</code></li>
+                    <li>Prolog: <code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code></li>
+                    <li>Nested elements for hierarchy</li>
+                    <li>Comments: <code>&lt;!-- This is a comment --&gt;</code></li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    XML is a flexible way to represent structured data in a standardized format. Its
+                    extensibility, readability, and platform independence make it widely used in data exchange,
+                    configuration files, and web services.
+                </p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_xml.html'">Notes</button>
@@ -282,10 +466,12 @@
         </div>
     </div>
 
-    <div id="win-dtd" class="window win98-border" style="top: 26%; left: 40%; width: 450px; height: 300px; display: none;">
+    <div id="win-dtd" class="window win98-border"
+        style="top: 26%; left: 40%; width: 450px; height: 300px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-dtd')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png"
+                    style="width:16px; height:16px;">
                 Rules.dtd
             </div>
             <div class="title-bar-controls">
@@ -295,9 +481,75 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>Document Type Definition</h2>
-                <p>Validation rules for XML.</p>
-                <ul><li>!ELEMENT</li><li>!ATTLIST</li></ul>
+                <!DOCTYPE html>
+                <html lang="en">
+
+                <head>
+                    <meta charset="UTF-8">
+                    <title>What is DTD?</title>
+                </head>
+
+                <body>
+                    <h1>What is DTD?</h1>
+
+                    <p>
+                        <strong>DTD</strong> (Document Type Definition) is a set of rules that defines the structure,
+                        elements, and attributes of an XML document. It ensures that an XML file is
+                        <strong>valid</strong>
+                        and follows the expected format.
+                    </p>
+
+                    <h2>Key Features of DTD</h2>
+                    <ul>
+                        <li>Specifies allowed elements and their hierarchy</li>
+                        <li>Defines attributes for elements and their types</li>
+                        <li>Ensures XML documents are consistent and valid</li>
+                        <li>Can be declared internally or externally</li>
+                    </ul>
+
+                    <h2>Why Use DTD?</h2>
+                    <ul>
+                        <li>To enforce a standard structure for XML documents</li>
+                        <li>To validate XML data before processing</li>
+                        <li>To ensure compatibility between systems exchanging XML</li>
+                    </ul>
+
+                    <h2>Types of DTD</h2>
+                    <ul>
+                        <li><strong>Internal DTD:</strong> Defined inside the XML document</li>
+                        <li><strong>External DTD:</strong> Stored in a separate file and linked to the XML document</li>
+                    </ul>
+
+                    <h2>Example of DTD</h2>
+                    <p><strong>Internal DTD:</strong></p>
+                    <pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE note [
+  &lt;!ELEMENT note (to,from,heading,body)&gt;
+  &lt;!ELEMENT to (#PCDATA)&gt;
+  &lt;!ELEMENT from (#PCDATA)&gt;
+  &lt;!ELEMENT heading (#PCDATA)&gt;
+  &lt;!ELEMENT body (#PCDATA)&gt;
+]&gt;
+
+&lt;note&gt;
+  &lt;to&gt;Alice&lt;/to&gt;
+  &lt;from&gt;Bob&lt;/from&gt;
+  &lt;heading&gt;Reminder&lt;/heading&gt;
+  &lt;body&gt;Don't forget our meeting.&lt;/body&gt;
+&lt;/note&gt;
+  </pre>
+
+                    <h2>Summary</h2>
+                    <p>
+                        DTD defines the structure and rules of an XML document, making it easier to validate,
+                        maintain, and exchange data reliably between systems. It is an essential part of
+                        working with XML in a structured and consistent way.
+                    </p>
+                </body>
+
+                </html>
+
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_dtd.html'">Notes</button>
@@ -306,7 +558,8 @@
         </div>
     </div>
 
-    <div id="win-xsl" class="window win98-border" style="top: 30%; left: 45%; width: 450px; height: 300px; display: none;">
+    <div id="win-xsl" class="window win98-border"
+        style="top: 30%; left: 45%; width: 450px; height: 300px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-xsl')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png" style="width:16px; height:16px;">
@@ -319,9 +572,69 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>XSL Transformations</h2>
-                <p>Transform XML to HTML.</p>
-                <ul><li>xsl:template</li><li>xsl:for-each</li></ul>
+                <!DOCTYPE html>
+                <html lang="en">
+
+                <head>
+                    <meta charset="UTF-8">
+                    <title>What is XSL?</title>
+                </head>
+
+                <body>
+                    <h1>What is XSL?</h1>
+
+                    <p>
+                        <strong>XSL</strong> (eXtensible Stylesheet Language) is a language used to transform
+                        and style XML documents. It defines how XML data should be displayed or converted into
+                        other formats like HTML, plain text, or even another XML structure.
+                    </p>
+
+                    <h2>Key Components of XSL</h2>
+                    <ul>
+                        <li><strong>XSLT (XSL Transformations):</strong> Used to transform XML data into other formats.
+                        </li>
+                        <li><strong>XPath:</strong> A language for navigating and selecting nodes in an XML document.
+                        </li>
+                        <li><strong>Formatting Objects (XSL-FO):</strong> Defines how XML data is formatted for output,
+                            e.g., PDF.</li>
+                    </ul>
+
+                    <h2>Why Use XSL?</h2>
+                    <ul>
+                        <li>To separate data (XML) from presentation (HTML, PDF, etc.)</li>
+                        <li>To transform XML data into different formats for web or print</li>
+                        <li>To filter, sort, or rearrange XML content dynamically</li>
+                        <li>To create consistent styling for XML-based documents</li>
+                    </ul>
+
+                    <h2>Basic Example of XSLT</h2>
+                    <pre>
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:template match="/"&gt;
+    &lt;html&gt;
+      &lt;body&gt;
+        &lt;h2&gt;Book List&lt;/h2&gt;
+        &lt;ul&gt;
+          &lt;xsl:for-each select="books/book"&gt;
+            &lt;li&gt;&lt;xsl:value-of select="title"/&gt; by &lt;xsl:value-of select="author"/&gt;&lt;/li&gt;
+          &lt;/xsl:for-each&gt;
+        &lt;/ul&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+  </pre>
+
+                    <h2>Summary</h2>
+                    <p>
+                        XSL allows developers to transform and style XML data for different outputs.
+                        By combining XSLT, XPath, and XSL-FO, it provides powerful tools to separate content
+                        from presentation, making XML more versatile for web and document processing.
+                    </p>
+                </body>
+
+                </html>
+
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_xsl.html'">Notes</button>
@@ -330,7 +643,8 @@
         </div>
     </div>
 
-    <div id="win-json" class="window win98-border" style="top: 34%; left: 50%; width: 450px; height: 250px; display: none;">
+    <div id="win-json" class="window win98-border"
+        style="top: 34%; left: 50%; width: 450px; height: 250px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-json')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/chm-0.png" style="width:16px; height:16px;">
@@ -343,8 +657,50 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>JSON</h2>
-                <p>{ "key": "value" }</p>
+                <h1>What is JSON?</h1>
+
+                <p>
+                    <strong>JSON</strong> (JavaScript Object Notation) is a lightweight data-interchange format
+                    that is easy for humans to read and write, and easy for machines to parse and generate.
+                    It is commonly used for transmitting data between a server and a web application.
+                </p>
+
+                <h2>Key Features of JSON</h2>
+                <ul>
+                    <li>Text-based and human-readable</li>
+                    <li>Language-independent, but based on JavaScript object syntax</li>
+                    <li>Lightweight compared to XML</li>
+                    <li>Supports hierarchical (nested) data structures</li>
+                    <li>Widely used for APIs and web services</li>
+                </ul>
+
+                <h2>Why Use JSON?</h2>
+                <ul>
+                    <li>Easy to read and write for humans</li>
+                    <li>Easy to parse and generate by machines</li>
+                    <li>Ideal for client-server communication (AJAX, REST APIs)</li>
+                    <li>Supports arrays, objects, strings, numbers, booleans, and null</li>
+                </ul>
+
+                <h2>JSON Syntax</h2>
+                <pre>
+{
+  "name": "Alice",
+  "age": 30,
+  "isStudent": false,
+  "skills": ["HTML", "CSS", "JavaScript"],
+  "address": {
+    "city": "New York",
+    "zip": "10001"
+  }
+}
+  </pre>
+
+                <h2>Summary</h2>
+                <p>
+                    JSON is a simple and efficient format for exchanging data between systems.
+                    Its readability and lightweight structure make it the preferred choice for modern web
+                    applications and APIs.
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_json.html'">Notes</button>
@@ -353,10 +709,12 @@
         </div>
     </div>
 
-    <div id="win-dom" class="window win98-border" style="top: 38%; left: 55%; width: 450px; height: 300px; display: none;">
+    <div id="win-dom" class="window win98-border"
+        style="top: 38%; left: 55%; width: 450px; height: 300px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-dom')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/network_cool_two_pcs-0.png"
+                    style="width:16px; height:16px;">
                 DOM_Tree.js
             </div>
             <div class="title-bar-controls">
@@ -366,9 +724,53 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>The DOM</h2>
-                <p>Document Object Model.</p>
-                <ul><li>querySelector</li><li>addEventListener</li></ul>
+                <h1>What is the DOM?</h1>
+
+                <p>
+                    <strong>DOM</strong> (Document Object Model) is a programming interface for HTML and XML documents.
+                    It represents the page as a structured tree of objects (nodes), allowing scripts like JavaScript
+                    to access, modify, and manipulate the content, structure, and style of web pages dynamically.
+                </p>
+
+                <h2>Key Features of the DOM</h2>
+                <ul>
+                    <li>Represents a web page as a tree of nodes: elements, attributes, text, etc.</li>
+                    <li>Enables dynamic updates of content and structure</li>
+                    <li>Provides methods to traverse, add, remove, or modify nodes</li>
+                    <li>Language-independent, but most commonly used with JavaScript in browsers</li>
+                    <li>Standardized by the W3C</li>
+                </ul>
+
+                <h2>Why Use the DOM?</h2>
+                <ul>
+                    <li>To dynamically change HTML content without reloading the page</li>
+                    <li>To respond to user interactions (clicks, form input, etc.)</li>
+                    <li>To manipulate styles and attributes dynamically</li>
+                    <li>To create interactive and responsive web applications</li>
+                </ul>
+
+                <h2>Basic Example of DOM Manipulation (JavaScript)</h2>
+                <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="demo"&gt;Hello, World!&lt;/p&gt;
+  &lt;button onclick="changeText()"&gt;Click Me&lt;/button&gt;
+
+  &lt;script&gt;
+    function changeText() {
+      document.getElementById("demo").innerHTML = "Hello, DOM!";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+
+                <h2>Summary</h2>
+                <p>
+                    The DOM provides a bridge between HTML/XML documents and programming languages.
+                    By using the DOM, developers can create dynamic, interactive, and responsive web pages
+                    that react to user input and events in real time.
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_dom.html'">Notes</button>
@@ -377,10 +779,12 @@
         </div>
     </div>
 
-    <div id="win-m04" class="window win98-border" style="top: 15%; left: 20%; width: 400px; height: 250px; display: none;">
+    <div id="win-m04" class="window win98-border"
+        style="top: 15%; left: 20%; width: 400px; height: 250px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-m04')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-0.png"
+                    style="width:16px; height:16px;">
                 M04_Notes.doc
             </div>
             <div class="title-bar-controls">
@@ -390,8 +794,81 @@
         </div>
         <div class="window-body">
             <div class="content-area win98-inset">
-                <h2>JS HTML Integration</h2>
-                <p>Connecting scripts to markup.</p>
+                <h1>JavaScript and HTML Integration</h1>
+
+                <p>
+                    JavaScript (JS) is a scripting language used to add interactivity and dynamic behavior
+                    to web pages. To make JS work, it must be connected to HTML markup. There are several ways
+                    to integrate JavaScript into an HTML document.
+                </p>
+
+                <h2>1. Inline JavaScript</h2>
+                <p>
+                    JavaScript can be added directly to an HTML element using event attributes such as
+                    <code>onclick</code>.
+                </p>
+                <pre>
+&lt;button onclick="alert('Hello!')"&gt;Click Me&lt;/button&gt;
+  </pre>
+
+                <h2>2. Internal JavaScript</h2>
+                <p>
+                    JavaScript can be written inside a <code>&lt;script&gt;</code> tag within the HTML file, usually in
+                    the <code>&lt;head&gt;</code> or at the end of the <code>&lt;body&gt;</code>.
+                </p>
+                <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script&gt;
+    function greet() {
+      alert('Hello from internal JS!');
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button onclick="greet()"&gt;Greet&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+
+                <h2>3. External JavaScript</h2>
+                <p>
+                    JavaScript can be placed in a separate <code>.js</code> file and linked using the <code>src</code>
+                    attribute of the <code>&lt;script&gt;</code> tag.
+                </p>
+                <pre>
+&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button onclick="sayHello()"&gt;Say Hello&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- script.js --&gt;
+function sayHello() {
+  alert('Hello from external JS!');
+}
+  </pre>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Place scripts at the end of <code>&lt;body&gt;</code> for faster page loading.</li>
+                    <li>Keep JavaScript separate in external files for maintainability.</li>
+                    <li>Use unobtrusive JavaScript (add event listeners in JS, not inline in HTML).</li>
+                    <li>Use <code>defer</code> or <code>async</code> attributes to control script loading.</li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    Integrating JavaScript with HTML allows developers to create interactive, dynamic,
+                    and responsive web pages. Inline, internal, and external scripts all have their uses,
+                    but separating code into external files and using event listeners is the modern best practice.
+                </p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_dom.html'">Notes</button>
@@ -400,7 +877,8 @@
         </div>
     </div>
 
-    <div id="win-m09-1" class="window win98-border" style="top: 20%; left: 30%; width: 400px; height: 250px; display: none;">
+    <div id="win-m09-1" class="window win98-border"
+        style="top: 20%; left: 30%; width: 400px; height: 250px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-m09-1')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px; height:16px;">
@@ -414,7 +892,62 @@
         <div class="window-body">
             <div class="content-area win98-inset">
                 <h2>JS Basics</h2>
-                <p>Loops, Conditionals, Variables.</p>
+                <p>
+                    JavaScript (JS) is a programming language used to add logic and interactivity to web pages.
+                    Its core building blocks include <strong>variables</strong>, <strong>conditionals</strong>, and
+                    <strong>loops</strong>.
+                </p>
+
+                <h3>1. Variables</h3>
+                <p>
+                    Variables store data values. In modern JavaScript, use <code>let</code> or <code>const</code>
+                    instead of <code>var</code>.
+                </p>
+                <pre>
+let name = "Alice";    // can be changed
+const pi = 3.14159;    // constant value
+</pre>
+
+                <h3>2. Conditionals</h3>
+                <p>
+                    Conditionals control the flow of code using <code>if</code>, <code>else if</code>, and
+                    <code>else</code>.
+                </p>
+                <pre>
+let score = 85;
+if (score >= 90) {
+  console.log("A grade");
+} else if (score >= 75) {
+  console.log("B grade");
+} else {
+  console.log("C grade");
+}
+</pre>
+
+                <h3>3. Loops</h3>
+                <p>
+                    Loops allow repeated execution of code blocks. Common types include <code>for</code> and
+                    <code>while</code>.
+                </p>
+                <pre>
+// For loop
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+// While loop
+let j = 0;
+while (j < 5) {
+  console.log(j);
+  j++;
+}
+</pre>
+
+                <h3>Summary</h3>
+                <p>
+                    Understanding variables, conditionals, and loops is essential to writing functional JavaScript.
+                    These basics let you store data, make decisions, and repeat actions dynamically in your web pages.
+                </p>
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_js_basics.html'">Notes</button>
@@ -423,7 +956,8 @@
         </div>
     </div>
 
-    <div id="win-m09-2" class="window win98-border" style="top: 25%; left: 40%; width: 400px; height: 250px; display: none;">
+    <div id="win-m09-2" class="window win98-border"
+        style="top: 25%; left: 40%; width: 400px; height: 250px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-m09-2')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" style="width:16px; height:16px;">
@@ -437,7 +971,65 @@
         <div class="window-body">
             <div class="content-area win98-inset">
                 <h2>Functional JS</h2>
-                <p>Arrow functions, map, filter, reduce.</p>
+                <p>
+                    Functional JavaScript emphasizes using functions to process data in a clean and predictable way.
+                    Key concepts include <strong>arrow functions</strong>, <strong>map</strong>,
+                    <strong>filter</strong>, and <strong>reduce</strong>.
+                </p>
+
+                <h3>1. Arrow Functions</h3>
+                <p>
+                    Arrow functions are a concise way to write functions.
+                </p>
+                <pre>
+// Traditional function
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow function
+const addArrow = (a, b) => a + b;
+
+console.log(addArrow(2, 3)); // 5
+</pre>
+
+                <h3>2. Map</h3>
+                <p>
+                    <code>map()</code> creates a new array by applying a function to each element of an existing array.
+                </p>
+                <pre>
+const numbers = [1, 2, 3, 4];
+const squares = numbers.map(num => num * num);
+console.log(squares); // [1, 4, 9, 16]
+</pre>
+
+                <h3>3. Filter</h3>
+                <p>
+                    <code>filter()</code> creates a new array with elements that pass a test defined in a function.
+                </p>
+                <pre>
+const ages = [12, 18, 25, 30];
+const adults = ages.filter(age => age >= 18);
+console.log(adults); // [18, 25, 30]
+</pre>
+
+                <h3>4. Reduce</h3>
+                <p>
+                    <code>reduce()</code> reduces an array to a single value by applying a function cumulatively.
+                </p>
+                <pre>
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // 10
+</pre>
+
+                <h3>Summary</h3>
+                <p>
+                    Functional JavaScript techniques like arrow functions, map, filter, and reduce allow you to write
+                    cleaner,
+                    more declarative code for processing arrays and data. They are essential for modern JS development.
+                </p>
+
             </div>
             <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
                 <button class="win98-btn" onclick="window.location.href='notes_js_func.html'">Notes</button>
@@ -445,11 +1037,13 @@
             </div>
         </div>
     </div>
-    
-    <div id="win-about" class="window win98-border" style="top: 10%; left: 10%; width: 350px; height: 200px; display: none;">
+
+    <div id="win-about" class="window win98-border"
+        style="top: 10%; left: 10%; width: 350px; height: 200px; display: none;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-about')">
             <div class="title-bar-text">
-                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" style="width:16px; height:16px;">
+                <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png"
+                    style="width:16px; height:16px;">
                 About Me.txt
             </div>
             <div class="title-bar-controls">
@@ -476,13 +1070,13 @@
             Start
         </div>
         <div class="taskbar-divider"></div>
-        
+
         <div class="taskbar-apps" id="taskbar-apps"></div>
 
         <div class="contact-info">
             <a href="mailto:trinidadx@proton.me">trinidadx@proton.me</a>
         </div>
-        
+
         <div class="tray">
             <span xmlns:cc="http://creativecommons.org/ns#">CC BY 4.0</span>
             <span id="clock" style="margin-left: 10px;">10:19 AM</span>
@@ -497,7 +1091,7 @@
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12;
-            hours = hours ? hours : 12; 
+            hours = hours ? hours : 12;
             document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
         }
         setInterval(updateClock, 1000);
@@ -510,9 +1104,9 @@
 
         function openWindow(id, title, iconName) {
             const win = document.getElementById(id);
-            
+
             if (!openWindows.find(w => w.id === id)) {
-                openWindows.push({id, title, iconName});
+                openWindows.push({ id, title, iconName });
                 renderTaskbar();
             }
 
@@ -537,25 +1131,25 @@
                 win.style.display = 'block';
                 bringToFront(win);
             }
-            renderTaskbar(); 
+            renderTaskbar();
         }
 
         function bringToFront(element) {
             zIndexCounter++;
             element.style.zIndex = zIndexCounter;
-            
+
             document.querySelectorAll('.title-bar').forEach(tb => {
                 tb.style.background = 'var(--title-bar-bg-inactive)';
             });
             element.querySelector('.title-bar').style.background = 'var(--title-bar-bg-active)';
-            
+
             renderTaskbar();
         }
 
         // --- MAXIMIZE LOGIC ---
         function toggleMaximize(id) {
             const win = document.getElementById(id);
-            
+
             if (maximizedStates[id]) {
                 win.style.top = maximizedStates[id].top;
                 win.style.left = maximizedStates[id].left;
@@ -586,14 +1180,14 @@
             openWindows.forEach(w => {
                 const winEl = document.getElementById(w.id);
                 const isTop = winEl.style.zIndex == zIndexCounter && winEl.style.display !== 'none';
-                
+
                 const btn = document.createElement('div');
                 btn.className = `taskbar-item ${isTop ? 'active' : ''}`;
                 btn.onclick = () => toggleWindow(w.id);
-                
+
                 const img = document.createElement('img');
                 img.src = `https://win98icons.alexmeub.com/icons/png/${w.iconName}`;
-                
+
                 const span = document.createElement('span');
                 span.innerText = w.title;
 
@@ -609,7 +1203,7 @@
         let offset = { x: 0, y: 0 };
 
         function startDrag(e, id) {
-            if(e.target.tagName === 'BUTTON') return;
+            if (e.target.tagName === 'BUTTON') return;
 
             const win = document.getElementById(id);
             if (win.classList.contains('maximized')) return;
@@ -632,7 +1226,7 @@
             isDragging = false;
             currentWindow = null;
         });
-        
+
         document.querySelectorAll('.window').forEach(win => {
             win.addEventListener('mousedown', () => bringToFront(win));
         });
@@ -659,4 +1253,5 @@
 
     </script>
 </body>
+
 </html>
