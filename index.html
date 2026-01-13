@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trinidad Diez - Web JavaScript</title>
     <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
-    <link rel="stylesheet" href="styles/styles.css">º
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 
@@ -25,6 +25,11 @@
         <div class="desktop-icon" onclick="openWindow('win-terminal', 'Terminal.exe', 'console_prompt-0.png')">
             <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/console_prompt-0.png') no-repeat center/contain;"></div>
             <span>Terminal.exe</span>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('win-github', 'GitHub.exe', 'msie2-0.png')">
+            <div class="icon-box" style="background: url('https://win98icons.alexmeub.com/icons/png/msie2-0.png') no-repeat center/contain;"></div>
+            <span>GitHub.exe</span>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('win-md', 'Markdown.md', 'template_empty-0.png')">
@@ -84,7 +89,7 @@
 
     </div>
 
-    <div id="win-terminal" class="window win98-border" style="top: 42%; left: 60%; width: 500px; height: 350px;">
+    <div id="win-terminal" class="window win98-border" style="top: 15%; left: 55%; width: 550px; height: 400px;">
         <div class="title-bar" onmousedown="startDrag(event, 'win-terminal')">
             <div class="title-bar-text">
                 <img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png" style="width:16px;">
@@ -95,19 +100,72 @@
                 <button onclick="closeWindow('win-terminal')">X</button>
             </div>
         </div>
-        <div class="window-body terminal-window-body">
+        <div class="window-body terminal-window-body" style="background-color: black; color: #00ff00; font-family: monospace; padding: 10px; overflow-y: auto; height: calc(100% - 30px);">
             <div class="terminal-content">
                 <p>Linux Terminal [Version 1.0.1]</p>
                 <p>(c) 2026 Corporation. All rights reserved.</p>
                 <br>
-                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">pwd</span></p>
-                <p>/home/user <span class="terminal-comment"># Working Directory</span></p>
+                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">help --verbose</span></p>
                 <br>
-                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="terminal-command">ls -la</span></p>
-                <p>-rw-r--r-- 1 user user  220 Jan 13 10:00 notes.txt</p>
-                <p>-rw-r--r-- 1 user user  120 Jan 13 10:05 style.css</p>
+                <p><strong>--- FILE SYSTEM COMMANDS ---</strong></p>
+                <p><span style="color:white;">pwd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Working Directory (Where am I?)</p>
+                <p><span style="color:white;">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List files in current directory</p>
+                <p><span style="color:white;">ls -a</span>&nbsp;&nbsp;&nbsp;&nbsp;List all files (including hidden ones)</p>
+                <p><span style="color:white;">cd [dir]</span>&nbsp;Change Directory (e.g., cd Documents)</p>
+                <p><span style="color:white;">cd ..</span>&nbsp;&nbsp;&nbsp;&nbsp;Go up one directory level</p>
                 <br>
-                <p><span class="terminal-prompt">user@localhost:~/Documents$</span> <span class="blink">_</span></p>
+                <p><strong>--- MANIPULATION ---</strong></p>
+                <p><span style="color:white;">mkdir</span>&nbsp;&nbsp;&nbsp;&nbsp;Make Directory (Create a folder)</p>
+                <p><span style="color:white;">touch</span>&nbsp;&nbsp;&nbsp;&nbsp;Create an empty file</p>
+                <p><span style="color:white;">cp [A][B]</span> Copy file A to location B</p>
+                <p><span style="color:white;">mv [A][B]</span> Move file A to B (also used to Rename)</p>
+                <p><span style="color:white;">rm [file]</span> Remove (delete) a file</p>
+                <p><span style="color:white;">rm -r</span>&nbsp;&nbsp;&nbsp;&nbsp;Remove directory and contents (Recursive)</p>
+                <br>
+                <p><strong>--- SYSTEM ---</strong></p>
+                <p><span style="color:white;">grep</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for text inside files</p>
+                <p><span style="color:white;">chmod</span>&nbsp;&nbsp;&nbsp;&nbsp;Change file permissions (Read/Write/Exec)</p>
+                <p><span style="color:white;">sudo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SuperUser DO (Execute as Admin)</p>
+                <br>
+                <p><span class="terminal-prompt">user@localhost:~$</span> <span class="blink">_</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-github" class="window win98-border" style="top: 10%; left: 15%; width: 480px; height: 380px; display: none;">
+        <div class="title-bar" onmousedown="startDrag(event, 'win-github')">
+            <div class="title-bar-text">
+                <img src="https://win98icons.alexmeub.com/icons/png/msie2-0.png" style="width:16px;">
+                GitHub.exe
+            </div>
+            <div class="title-bar-controls">
+                <button onclick="toggleMaximize('win-github')">□</button>
+                <button onclick="closeWindow('win-github')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="content-area win98-inset">
+                <h2>Git & GitHub</h2>
+                
+                <p><strong>GitHub</strong> is a cloud platform for hosting code, allowing multiple developers to work together using <strong>Git</strong> (Version Control).</p>
+                
+                
+
+[Image of git workflow diagram]
+
+
+                <h3>Key Concepts:</h3>
+                <ul>
+                    <li><strong>Repository (Repo):</strong> The folder where your project and its history lives.</li>
+                    <li><strong>Commit:</strong> A save point in your history. Like a checkpoint in a game.</li>
+                    <li><strong>Push:</strong> Uploading your local commits to the Cloud (GitHub).</li>
+                    <li><strong>Pull:</strong> Downloading changes from GitHub to your computer.</li>
+                    <li><strong>Branch:</strong> A parallel version of the code to test new features without breaking the main site.</li>
+                </ul>
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                <button class="win98-btn" onclick="window.location.href='notes_github.html'">Notes</button>
+                <button class="win98-btn">My Repos</button>
             </div>
         </div>
     </div>
