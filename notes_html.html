@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML5 Interactive Notes</title>
-    <link rel="stylesheet" href="/styles/notes.css">
+    <link rel="stylesheet" href="styles/notes.css">
     <style>
         /* Live Editor Styles */
         .editor-container {
@@ -22,6 +22,7 @@
             padding: 5px;
             resize: none;
             border: 2px inset white;
+            background: white;
         }
         .live-preview {
             flex: 1;
@@ -69,12 +70,12 @@
         th { background: #c0c0c0; }
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
-        <div class="title-bar-text">Notes Viewer</div>
+        <div class="title-bar-text">HTML5 Overview</div>
         <div class="title-bar-controls">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
@@ -105,8 +106,6 @@
                 <summary><strong>02 Structure & Semantics</strong></summary>
                 <p>HTML5 introduced semantic tags to describe <em>what</em> content is, not just how it looks.</p>
                 
-                
-
                 <div class="dom-tree">
                     <div class="node">&lt;body&gt;</div>
                     <div class="connector" style="height: 15px;"></div>
@@ -129,7 +128,6 @@
                         </div>
                     </div>
                 </div>
-                
             </details>
 
             <details open>
@@ -137,7 +135,7 @@
                 <p>Type in the left box to see the result on the right immediately.</p>
                 
                 <div class="editor-container">
-<textarea class="code-input" id="htmlInput" oninput="updatePreview()">
+                    <textarea class="code-input" id="htmlInput" oninput="updatePreview()">
 <h3>Hello World!</h3>
 <p>This is <strong>bold</strong> and <em>italic</em>.</p>
 <hr>
@@ -145,8 +143,7 @@
   <li>HTML</li>
   <li>CSS</li>
 </ul>
-<button>Click Me</button>
-</textarea>
+<button>Click Me</button></textarea>
                     <div class="live-preview" id="htmlPreview"></div>
                 </div>
                 
@@ -177,28 +174,24 @@
                 <summary><strong>05 Forms & Inputs</strong></summary>
                 <p><strong>The Mechanism:</strong> Data is sent from Client to Server.</p>
                 
-                
-                <div class="interactive-box" style="background: #e0e0e0; padding: 10px; border: 2px inset white;">
-                    <p><strong>Input Types Gallery (Visual Reference):</strong></p>
-                    <div class="input-grid">
-                        <div class="input-item">
-                            <label>color:</label> <input type="color">
-                        </div>
-                        <div class="input-item">
-                            <label>date:</label> <input type="date">
-                        </div>
-                        <div class="input-item">
-                            <label>range:</label> <input type="range">
-                        </div>
-                        <div class="input-item">
-                            <label>number:</label> <input type="number" placeholder="123">
-                        </div>
-                        <div class="input-item">
-                            <label>checkbox:</label> <input type="checkbox">
-                        </div>
-                        <div class="input-item">
-                            <label>radio:</label> <input type="radio">
-                        </div>
+                <div class="input-grid">
+                    <div class="input-item">
+                        <label>color:</label> <input type="color">
+                    </div>
+                    <div class="input-item">
+                        <label>date:</label> <input type="date">
+                    </div>
+                    <div class="input-item">
+                        <label>range:</label> <input type="range">
+                    </div>
+                    <div class="input-item">
+                        <label>number:</label> <input type="number" placeholder="123">
+                    </div>
+                    <div class="input-item">
+                        <label>checkbox:</label> <input type="checkbox">
+                    </div>
+                    <div class="input-item">
+                        <label>radio:</label> <input type="radio">
                     </div>
                 </div>
 
@@ -217,20 +210,11 @@
 &lt;/video&gt;</pre>
                 <p>Attributes: <code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>.</p>
             </details>
-
-        </div>
-        
-        <div class="window-footer">
-            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
 <script>
-    function closeWindow() {
-        document.getElementById('mainWindow').style.display = 'none';
-    }
-
     function updatePreview() {
         const input = document.getElementById('htmlInput').value;
         document.getElementById('htmlPreview').innerHTML = input;

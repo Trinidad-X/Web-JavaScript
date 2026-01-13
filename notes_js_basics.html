@@ -4,25 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Interactive Notes</title>
-    <link rel="stylesheet" href="/styles/styles.css"> 
+    <link rel="stylesheet" href="styles/notes.css">
+    <style>
+        .interactive-box { 
+            background: #d4d4d4; 
+            border: 2px inset white; 
+            padding: 10px; 
+            margin: 10px 0; 
+        }
+        .output-label {
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 5px;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+        .console-output {
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 10px;
+            height: 100px;
+            overflow-y: auto;
+            border: 2px inset #808080;
+            margin-top: 10px;
+        }
+        .tool-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 5px 0;
+        }
+    </style>
 </head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinidad Diez - Notes</title>
-    <link rel="icon" type="image/x-icon" href="https://m.media-amazon.com/images/I/71+mDoHG4mL.png">
-    <link rel="stylesheet" href="/styles/notes.css">
-</head>
-<body>
-
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
-        <div class="title-bar-text">Notes Viewer</div>
+        <div class="title-bar-text">JavaScript: Fundamentals and Modern Syntax</div>
         <div class="title-bar-controls">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
@@ -54,8 +75,8 @@
                 <div class="interactive-box">
                     <p><strong>Interactive Type Checker:</strong></p>
                     <div class="tool-row">
-                        <input type="text" id="typeInput" placeholder="Type something..." onkeyup="checkType()">
-                        <span id="typeOutput">Type: string</span>
+                        <input type="text" id="typeInput" placeholder="Type something..." onkeyup="checkType()" style="padding: 5px; flex: 1;">
+                        <span id="typeOutput" style="font-family: monospace;">Type: string</span>
                     </div>
                     <p style="font-size:11px; color:#555;">(Note: HTML inputs are technically always strings until parsed)</p>
                 </div>
@@ -84,7 +105,7 @@
                 <summary><strong>05 String Methods</strong></summary>
                 <div class="interactive-box">
                     <p>Manipulate the text below:</p>
-                    <input type="text" id="strInput" value="  JavaScript  " style="width: 200px;">
+                    <input type="text" id="strInput" value="  JavaScript  " style="width: 200px; padding: 5px;">
                     <div style="margin-top:10px;">
                         <button class="win98-btn" onclick="doStr('upper')">.toUpperCase()</button>
                         <button class="win98-btn" onclick="doStr('lower')">.toLowerCase()</button>
@@ -114,24 +135,10 @@
 console.log("Value of x:", x);</pre>
             </details>
         </div>
-        
-        <div class="window-footer">
-            <button class="win98-btn">Close</button>
-        </div>
     </div>
 </div>
 
-</body>
-</html>
-</div>
-
 <script>
-    // --- Window Control ---
-    function closeWindow() {
-        document.getElementById('mainWindow').style.display = 'none';
-        // Note: window.close() is usually blocked by browsers if script didn't open the tab
-    }
-
     // --- 02 Modals ---
     function runConfirm() {
         let result = confirm("Click OK or Cancel");
@@ -150,9 +157,8 @@ console.log("Value of x:", x);</pre>
     // --- 03 Type Checker ---
     function checkType() {
         let val = document.getElementById('typeInput').value;
-        let type = "string"; // Inputs are always strings in HTML
+        let type = "string";
         
-        // Simulating JS type detection for demo purposes
         if (val === "") {
             type = "empty string";
         } else if (!isNaN(val) && val.trim() !== "") {
@@ -174,7 +180,6 @@ console.log("Value of x:", x);</pre>
             case 'length': output = input.length; break;
         }
         
-        // Wrap strings in quotes for visual clarity, unless it's a number (length)
         if (typeof output === 'string') {
             document.getElementById('strOutput').innerText = '"' + output + '"';
         } else {
@@ -187,7 +192,7 @@ console.log("Value of x:", x);</pre>
     
     function log(msg) {
         vConsole.innerHTML += `<div>> ${msg}</div>`;
-        vConsole.scrollTop = vConsole.scrollHeight; // Auto scroll
+        vConsole.scrollTop = vConsole.scrollHeight;
     }
 
     function clearConsole() {
@@ -212,6 +217,5 @@ console.log("Value of x:", x);</pre>
         }
     }
 </script>
-
 </body>
 </html>

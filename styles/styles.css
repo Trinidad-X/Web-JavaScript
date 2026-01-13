@@ -1,54 +1,5 @@
 :root {
-            --win-gray: #c0c0c0;
-            --win-dark: #808080;
-            --win-light: #ffffff;
-            --win-blue: #000080;
-            --code-bg: #282c34;
-            --code-text: #abb2bf;
-        }
-        body { background-color: #008080; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; margin: 0; overflow: hidden; }
-        
-        /* Window Chrome */
-        .window {
-            width: 90vw; height: 90vh;
-            margin: 5vh auto;
-            background: var(--win-gray);
-            border: 2px solid;
-            border-color: var(--win-light) var(--win-dark) var(--win-dark) var(--win-light);
-            display: flex; flex-direction: column;
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
-        }
-        .title-bar {
-            background: linear-gradient(90deg, var(--win-blue), #1084d0);
-            padding: 4px 8px;
-            display: flex; justify-content: space-between; align-items: center;
-            color: white; font-weight: bold; font-size: 14px;
-        }
-        .window-body {
-            flex: 1; padding: 10px; overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--win-dark) var(--win-gray);
-        }
-
-        /* Content Styling */
-        h2 { border-bottom: 2px solid var(--win-dark); color: #333; margin-top: 0;}
-        details { margin-bottom: 10px; border: 1px dotted #888; padding: 5px; background: #e0e0e0; }
-        summary { cursor: pointer; font-weight: bold; user-select: none; }
-        summary:hover { background: #d0d0d0; }
-        
-        pre { 
-            background: var(--code-bg); 
-            color: var(--code-text);
-            padding: 10px; 
-            border: 2px inset; 
-            overflow-x: auto; 
-            font-family: 'Consolas', monospace;
-            border-radius: 4px;
-        }
-        code { font-family: 'Consolas', monospace; color: #d63384; background: #eee; padding: 2px 4px; }
-        .dark-code code { background: transparent; color: inherit; }
-
-        :root {
+    /* --- COLORS & THEME VARIABLES --- */
     --desktop-bg: #008080;
     --win-gray: #c0c0c0;
     --win-text: #000000;
@@ -58,6 +9,10 @@
     --title-bar-bg-inactive: #808080;
     --border-light: #dfdfdf;
     --border-dark: #404040;
+    
+    /* --- CODE HIGHLIGHTING VARIABLES --- */
+    --code-bg: #282c34;
+    --code-text: #abb2bf;
 }
 
 * {
@@ -75,35 +30,6 @@ body {
     display: flex;
     flex-direction: column;
     user-select: none;
-}
-
-/* --- BSOD STYLE --- */
-#bsod {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #0000AA;
-    color: white;
-    font-family: 'Courier New', monospace;
-    z-index: 999999;
-    padding: 10% 15%;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.5;
-    cursor: pointer;
-}
-
-.blink {
-    animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-    50% {
-        opacity: 0;
-    }
 }
 
 /* --- 98 UTILS --- */
@@ -260,6 +186,7 @@ body {
     flex-direction: column;
 }
 
+/* --- CONTENT STYLING (For Notes & Inside Windows) --- */
 .content-area {
     background: white;
     border: 2px solid;
@@ -274,6 +201,7 @@ h2 {
     font-size: 16px;
     border-bottom: 1px dotted #808080;
     padding-bottom: 5px;
+    color: #333;
 }
 
 h3 {
@@ -297,6 +225,46 @@ p {
     margin-bottom: 10px;
 }
 
+details { 
+    margin-bottom: 10px; 
+    border: 1px dotted #888; 
+    padding: 5px; 
+    background: #e0e0e0; 
+}
+
+summary { 
+    cursor: pointer; 
+    font-weight: bold; 
+    user-select: none; 
+}
+
+summary:hover { 
+    background: #d0d0d0; 
+}
+
+pre { 
+    background: var(--code-bg); 
+    color: var(--code-text);
+    padding: 10px; 
+    border: 2px inset; 
+    overflow-x: auto; 
+    font-family: 'Consolas', monospace;
+    border-radius: 4px;
+}
+
+code { 
+    font-family: 'Consolas', monospace; 
+    color: #d63384; 
+    background: #eee; 
+    padding: 2px 4px; 
+}
+
+.dark-code code { 
+    background: transparent; 
+    color: inherit; 
+}
+
+
 /* --- TERMINAL SPECIFIC STYLES --- */
 .terminal-window-body {
     padding: 2px;
@@ -309,7 +277,6 @@ p {
     font-size: 12px;
     padding: 10px;
     height: 100%;
-    /* Fill window */
     overflow-y: auto;
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
@@ -334,6 +301,32 @@ p {
     font-style: italic;
 }
 
+/* --- BSOD STYLE --- */
+#bsod {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000AA;
+    color: white;
+    font-family: 'Courier New', monospace;
+    z-index: 999999;
+    padding: 10% 15%;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
 
 /* --- TASKBAR --- */
 .taskbar {

@@ -4,29 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XSL Notes</title>
+    <link rel="stylesheet" href="styles/notes.css">
     <style>
-        :root { --win-gray: #c0c0c0; --win-blue: #000080; --code-bg: #282c34; }
-        body { background-color: #008080; font-family: 'Segoe UI', sans-serif; height: 100vh; margin: 0; overflow: hidden; }
-        .window { width: 90vw; height: 90vh; margin: 5vh auto; background: var(--win-gray); border: 2px solid #fff; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
-        .title-bar { background: linear-gradient(90deg, var(--win-blue), #1084d0); padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: bold; }
-        .window-body { flex: 1; padding: 10px; overflow-y: auto; }
-        .window-footer { padding: 10px; text-align: right; border-top: 1px solid #888; }
-        
-        details { margin-bottom: 10px; border: 1px dotted #888; padding: 5px; background: #e0e0e0; }
-        summary { cursor: pointer; font-weight: bold; }
-        pre { background: var(--code-bg); color: #abb2bf; padding: 10px; border-radius: 4px; overflow-x: auto; }
-        code { background: #fff; padding: 2px 4px; border: 1px solid #888; color: #d00; font-family: monospace; }
-        
-        /* Buttons */
-        .close-btn { background: var(--win-gray); border: 1px outset #fff; font-weight: bold; cursor: pointer; }
-        .win98-btn { background: var(--win-gray); border: 2px outset #fff; padding: 5px 20px; font-weight: bold; cursor: pointer; }
-        .win98-btn:active { border-style: inset; }
-
         /* Two-Column Layout for Editor */
         .editor-container { display: flex; gap: 10px; height: 200px; margin-bottom: 10px; }
         .editor-pane { flex: 1; display: flex; flex-direction: column; }
         .editor-pane label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
-        textarea { flex: 1; resize: none; padding: 5px; font-family: monospace; border: 2px inset #fff; }
+        textarea { flex: 1; resize: none; padding: 5px; font-family: monospace; border: 2px inset #fff; background: white; }
         
         /* Result Box */
         .result-box { background: white; border: 2px inset #fff; padding: 10px; min-height: 100px; overflow: auto; }
@@ -37,57 +21,57 @@
         .result-box th { background-color: #eee; }
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
-        <span>XSL - Extensible Stylesheet Language</span>
-        <button class="close-btn" onclick="window.location.href='index.html'">X</button>
+        <div class="title-bar-text">XSL - Extensible Stylesheet Language</div>
+        <div class="title-bar-controls">
+            <button onclick="window.location.href='index.html'">X</button>
+        </div>
     </div>
     
     <div class="window-body">
-        <details open>
-            <summary><strong>01. Live Transformation (XSLT)</strong></summary>
-            <p style="font-size: 14px; margin: 5px 0;">Modify the XML or XSL below to see the HTML table generate instantly.</p>
-            
-            <div class="editor-container">
-                <div class="editor-pane">
-                    <label>Source XML:</label>
-                    <textarea id="inputXML" oninput="runXSLT()"></textarea>
+        <div class="content-area">
+            <details open>
+                <summary><strong>01. Live Transformation (XSLT)</strong></summary>
+                <p style="font-size: 14px; margin: 5px 0;">Modify the XML or XSL below to see the HTML table generate instantly.</p>
+                
+                <div class="editor-container">
+                    <div class="editor-pane">
+                        <label>Source XML:</label>
+                        <textarea id="inputXML" oninput="runXSLT()"></textarea>
+                    </div>
+                    <div class="editor-pane">
+                        <label>Style XSL:</label>
+                        <textarea id="inputXSL" oninput="runXSLT()"></textarea>
+                    </div>
                 </div>
-                <div class="editor-pane">
-                    <label>Style XSL:</label>
-                    <textarea id="inputXSL" oninput="runXSLT()"></textarea>
-                </div>
-            </div>
 
-            <label style="font-size: 12px; font-weight: bold;">HTML Output:</label>
-            <div id="outputResult" class="result-box"></div>
-        </details>
+                <label style="font-size: 12px; font-weight: bold;">HTML Output:</label>
+                <div id="outputResult" class="result-box"></div>
+            </details>
 
-        <details>
-            <summary><strong>02. Core Concepts</strong></summary>
+            <details>
+                <summary><strong>02. Core Concepts</strong></summary>
+                
+                <p><strong>XSLT (Transformations):</strong> A language for transforming XML documents into other formats (like HTML, Text, or other XML).</p>
+                <ul>
+                    <li>It uses <strong>XPath</strong> to navigate the XML tree.</li>
+                    <li>It uses <strong>Templates</strong> to define how nodes should be displayed.</li>
+                </ul>
+            </details>
             
-            <p><strong>XSLT (Transformations):</strong> A language for transforming XML documents into other formats (like HTML, Text, or other XML).</p>
-            <ul>
-                <li>It uses <strong>XPath</strong> to navigate the XML tree.</li>
-                <li>It uses <strong>Templates</strong> to define how nodes should be displayed.</li>
-            </ul>
-        </details>
-        
-        <details>
-            <summary><strong>03. Common Tags</strong></summary>
-            <ul>
-                <li><code>&lt;xsl:template match="/"&gt;</code>: Defines the root match.</li>
-                <li><code>&lt;xsl:for-each select="..."&gt;</code>: Loops through a set of nodes (like a JS <i>for</i> loop).</li>
-                <li><code>&lt;xsl:value-of select="..."&gt;</code>: Extracts the text value of an element.</li>
-                <li><code>&lt;xsl:sort select="..."&gt;</code>: Sorts output alphabetically or numerically.</li>
-                <li><code>&lt;xsl:if test="..."&gt;</code>: Conditional logic.</li>
-            </ul>
-        </details>
-    </div>
-
-    <div class="window-footer">
-        <button class="win98-btn" onclick="window.location.href='index.html'">Close</button>
+            <details>
+                <summary><strong>03. Common Tags</strong></summary>
+                <ul>
+                    <li><code>&lt;xsl:template match="/"&gt;</code>: Defines the root match.</li>
+                    <li><code>&lt;xsl:for-each select="..."&gt;</code>: Loops through a set of nodes (like a JS <i>for</i> loop).</li>
+                    <li><code>&lt;xsl:value-of select="..."&gt;</code>: Extracts the text value of an element.</li>
+                    <li><code>&lt;xsl:sort select="..."&gt;</code>: Sorts output alphabetically or numerically.</li>
+                    <li><code>&lt;xsl:if test="..."&gt;</code>: Conditional logic.</li>
+                </ul>
+            </details>
+        </div>
     </div>
 </div>
 
@@ -146,14 +130,12 @@
             const xmlDoc = parser.parseFromString(xmlText, "text/xml");
             const xslDoc = parser.parseFromString(xslText, "text/xml");
 
-            // Check for parse errors
             if (xmlDoc.getElementsByTagName("parsererror").length > 0 || 
                 xslDoc.getElementsByTagName("parsererror").length > 0) {
                 output.innerHTML = "<span style='color:red'>Syntax Error in XML or XSL</span>";
                 return;
             }
 
-            // Perform Transformation
             if (window.XSLTProcessor) {
                 const xsltProcessor = new XSLTProcessor();
                 xsltProcessor.importStylesheet(xslDoc);
@@ -168,7 +150,6 @@
         }
     }
 
-    // Run once on load
     runXSLT();
 </script>
 </body>

@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XML Interactive Notes</title>
-    <link rel="stylesheet" href="/styles/notes.css">
+    <link rel="stylesheet" href="styles/notes.css">
     <style>
-        /* Shared Interactive Styles */
-        body, html { overflow: hidden; height: 100%; margin: 0; }
-        .window { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; display: flex; flex-direction: column; }
-        
         .interactive-box {
             background: #e0e0e0;
             border: 2px solid;
@@ -43,12 +39,12 @@
         th { background: #c0c0c0; }
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
-        <div class="title-bar-text">Notes Viewer</div>
+        <div class="title-bar-text">XML Fundamentals</div>
         <div class="title-bar-controls">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
@@ -59,7 +55,6 @@
             <details open>
                 <summary><strong>01 Syntax & Elements</strong></summary>
                 <p>XML stores data in a hierarchical format. Unlike HTML, <strong>you define your own tags</strong>.</p>
-                
                 
                 <div class="interactive-box">
                     <p><strong>Basic Rules:</strong></p>
@@ -74,7 +69,6 @@
             <details>
                 <summary><strong>02 Tree Structure (The Root)</strong></summary>
                 <p>Every XML document must have exactly <strong>one root element</strong> that contains all others.</p>
-                
                 
                 <p><strong>Structure Example:</strong></p>
                 <pre>&lt;library&gt;          &lt;!-- Root --&gt;
@@ -103,7 +97,6 @@
                 <summary><strong>04 Attributes</strong></summary>
                 <p>Data can be stored as <strong>Child Elements</strong> or <strong>Attributes</strong>.</p>
                 
-                
                 <table style="margin-top:10px;">
                     <tr>
                         <th>As Attribute</th>
@@ -127,7 +120,7 @@
                 <div class="interactive-box">
                     <p><strong>Entity Converter:</strong></p>
                     <div style="display:flex; gap:10px; align-items:center;">
-                        <input type="text" id="entityInput" placeholder="Type text with < or &" style="flex:1;">
+                        <input type="text" id="entityInput" placeholder="Type text with < or &" style="flex:1; padding: 5px;">
                         <button class="win98-btn" onclick="convertEntities()">Convert</button>
                     </div>
                     <p id="entityOutput" class="status-bar">Result: </p>
@@ -150,37 +143,25 @@
                 <p><strong>Comments:</strong> (Cannot be nested)</p>
                 <pre>&lt;!-- This is a comment --&gt;</pre>
             </details>
-
-        </div>
-        
-        <div class="window-footer">
-            <button class="win98-btn" onclick="closeWindow()">Close</button>
         </div>
     </div>
 </div>
 
 <script>
-    function closeWindow() {
-        document.getElementById('mainWindow').style.display = 'none';
-    }
-
     // --- XML Validator Logic ---
     function validateXML() {
         const input = document.getElementById('xmlInput').value;
         const resultBox = document.getElementById('validationResult');
         
-        // Use browser's built-in DOMParser
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(input, "text/xml");
         const parserError = xmlDoc.getElementsByTagName("parsererror");
 
         if (parserError.length > 0) {
-            // Extract the error message
             let msg = parserError[0].textContent;
-            // Clean up browser specific error text for brevity
             msg = msg.split(':')[0] + " error."; 
             resultBox.innerHTML = "<span class='error-msg'>INVALID:</span> " + "Check tags strictly.";
-            resultBox.title = parserError[0].textContent; // Tooltip full error
+            resultBox.title = parserError[0].textContent;
         } else {
             resultBox.innerHTML = "<span class='success-msg'>VALID:</span> The syntax is correct.";
         }

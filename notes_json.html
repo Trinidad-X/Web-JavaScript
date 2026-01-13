@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON Interactive Notes</title>
+    <link rel="stylesheet" href="styles/notes.css">
     <style>
-        /* --- INTERACTIVE TOOLS --- */
-        
-        /* 1. Validator Tool */
+        /* Validator Tool */
         .tool-panel { display: flex; gap: 10px; margin-top: 10px; height: 250px; }
         .tool-col { flex: 1; display: flex; flex-direction: column; }
         textarea.json-input { 
@@ -21,7 +20,7 @@
         .valid { background: #008000; }
         .invalid { background: #800000; }
 
-        /* 2. Format Switcher */
+        /* Format Switcher */
         .tabs { display: flex; gap: 2px; margin-bottom: -2px; z-index: 10; }
         .tab-btn {
             background: var(--win-gray); border: 1px solid var(--win-dark);
@@ -30,63 +29,66 @@
         }
         .tab-btn.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px; padding-bottom: 7px; }
         .tab-content { background: #fff; border: 2px solid var(--win-dark); padding: 15px; min-height: 150px; }
-
+        
+        table { border-collapse: collapse; width: 100%; border: 1px solid #999; }
+        th, td { border: 1px solid #808080; padding: 4px; text-align: left; }
+        th { background: #c0c0c0; }
     </style>
 </head>
-<body>
-<div class="window">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
         <div class="title-bar-text">JSON - JavaScript Object Notation</div>
         <div class="title-bar-controls">
-            <button style="font-weight:bold; width:20px;">X</button>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
     <div class="window-body">
-        
-        <details open>
-            <summary><strong>01. Live JSON Validator & Formatter</strong></summary>
-            <p>Paste messy JSON on the left. It will automatically format on the right, or tell you if you made a syntax error (like using single quotes!).</p>
-            <div class="tool-panel">
-                <div class="tool-col">
-                    <label><strong>Input (Messy)</strong></label>
-                    <textarea class="json-input" id="inputJson" oninput="validateJSON()">{ "name": "John", "age": 30, "city": "New York", 'badQuote': true }</textarea>
+        <div class="content-area">
+            <details open>
+                <summary><strong>01. Live JSON Validator & Formatter</strong></summary>
+                <p>Paste messy JSON on the left. It will automatically format on the right, or tell you if you made a syntax error (like using single quotes!).</p>
+                <div class="tool-panel">
+                    <div class="tool-col">
+                        <label><strong>Input (Messy)</strong></label>
+                        <textarea class="json-input" id="inputJson" oninput="validateJSON()">{ "name": "John", "age": 30, "city": "New York", 'badQuote': true }</textarea>
+                    </div>
+                    <div class="tool-col">
+                        <label><strong>Output (Pretty Print)</strong></label>
+                        <textarea class="json-input" id="outputJson" readonly></textarea>
+                    </div>
                 </div>
-                <div class="tool-col">
-                    <label><strong>Output (Pretty Print)</strong></label>
-                    <textarea class="json-input" id="outputJson" readonly></textarea>
+                <div id="statusIndicator" class="status-bar invalid">Invalid JSON: Unexpected token ' in JSON at position 47</div>
+            </details>
+
+            <details>
+                <summary><strong>02. Introduction & Syntax</strong></summary>
+                
+                <p><strong>JSON</strong> is a text format for storing and transporting data. It is language-independent but uses JavaScript syntax.</p>
+                <ul>
+                    <li><strong>Data Types:</strong> String, Number, Boolean, Array <code>[]</code>, Object <code>{}</code>, null.</li>
+                    <li><strong>Rules:</strong>
+                        <ul>
+                            <li>Keys must be in <code>"double quotes"</code>.</li>
+                            <li>No trailing commas allowed.</li>
+                            <li>No comments allowed.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </details>
+
+            <details>
+                <summary><strong>03. Format Comparison (Interactive)</strong></summary>
+                <p>Click the tabs to see how the same data looks in different formats.</p>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('json')">JSON</button>
+                    <button class="tab-btn" onclick="switchTab('xml')">XML</button>
+                    <button class="tab-btn" onclick="switchTab('yaml')">YAML</button>
                 </div>
-            </div>
-            <div id="statusIndicator" class="status-bar invalid">Invalid JSON: Unexpected token ' in JSON at position 47</div>
-        </details>
-
-        <details>
-            <summary><strong>02. Introduction & Syntax</strong></summary>
-            
-            <p><strong>JSON</strong> is a text format for storing and transporting data. It is language-independent but uses JavaScript syntax.</p>
-            <ul>
-                <li><strong>Data Types:</strong> String, Number, Boolean, Array <code>[]</code>, Object <code>{}</code>, null.</li>
-                <li><strong>Rules:</strong>
-                    <ul>
-                        <li>Keys must be in <code>"double quotes"</code>.</li>
-                        <li>No trailing commas allowed.</li>
-                        <li>No comments allowed.</li>
-                    </ul>
-                </li>
-            </ul>
-        </details>
-
-        <details>
-            <summary><strong>03. Format Comparison (Interactive)</strong></summary>
-            <p>Click the tabs to see how the same data looks in different formats.</p>
-            
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('json')">JSON</button>
-                <button class="tab-btn" onclick="switchTab('xml')">XML</button>
-                <button class="tab-btn" onclick="switchTab('yaml')">YAML</button>
-            </div>
-            <div class="tab-content">
-                <pre class="dark-code"><code id="compareCode">
+                <div class="tab-content">
+                    <pre class="dark-code"><code id="compareCode">
 {
   "employee": {
     "name": "John Doe",
@@ -94,68 +96,63 @@
     "active": true
   }
 }</code></pre>
-            </div>
-            
-        </details>
+                </div>
+            </details>
 
-        <details>
-            <summary><strong>04. JSON Schema</strong></summary>
-            <p>Schema is like a "contract" or blueprint. It validates that the data you receive matches what you expect.</p>
-            
-            <div style="display: flex; gap: 10px;">
-                <div style="flex:1">
-                    <strong>The Schema (Rules):</strong>
-                    <pre class="dark-code" style="font-size: 0.8em;">
+            <details>
+                <summary><strong>04. JSON Schema</strong></summary>
+                <p>Schema is like a "contract" or blueprint. It validates that the data you receive matches what you expect.</p>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex:1">
+                        <strong>The Schema (Rules):</strong>
+                        <pre class="dark-code" style="font-size: 0.8em;">
 "age": {
     "type": "integer",
     "minimum": 18
 }</pre>
-                </div>
-                <div style="flex:1">
-                    <strong>The Data:</strong>
-                    <pre class="dark-code" style="font-size: 0.8em;">
+                    </div>
+                    <div style="flex:1">
+                        <strong>The Data:</strong>
+                        <pre class="dark-code" style="font-size: 0.8em;">
 "age": 12 
 // ❌ Error: Must be >= 18</pre>
+                    </div>
                 </div>
-            </div>
-        </details>
+            </details>
 
-        <details>
-            <summary><strong>05. JavaScript Usage</strong></summary>
-            <p>The two most important methods in JavaScript:</p>
-            <table style="width:100%; border-collapse: collapse; border: 1px solid #999;">
-                <tr style="background:#ccc;"><th>Method</th><th>Direction</th><th>Example</th></tr>
-                <tr>
-                    <td><code>JSON.parse()</code></td>
-                    <td>String &rarr; Object</td>
-                    <td><code>const obj = JSON.parse(str);</code></td>
-                </tr>
-                <tr>
-                    <td><code>JSON.stringify()</code></td>
-                    <td>Object &rarr; String</td>
-                    <td><code>const str = JSON.stringify(data);</code></td>
-                </tr>
-            </table>
-        </details>
+            <details>
+                <summary><strong>05. JavaScript Usage</strong></summary>
+                <p>The two most important methods in JavaScript:</p>
+                <table>
+                    <tr style="background:#ccc;"><th>Method</th><th>Direction</th><th>Example</th></tr>
+                    <tr>
+                        <td><code>JSON.parse()</code></td>
+                        <td>String → Object</td>
+                        <td><code>const obj = JSON.parse(str);</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>JSON.stringify()</code></td>
+                        <td>Object → String</td>
+                        <td><code>const str = JSON.stringify(data);</code></td>
+                    </tr>
+                </table>
+            </details>
 
-        <details>
-            <summary><strong>06. Practical Exercise: Sports Center</strong></summary>
-            
-            <p><strong>Goal:</strong> Convert this hierarchy into JSON.</p>
-            <pre>
+            <details>
+                <summary><strong>06. Practical Exercise: Sports Center</strong></summary>
+                
+                <p><strong>Goal:</strong> Convert this hierarchy into JSON.</p>
+                <pre>
 Sports Center
 ├── Name: "City Sports Complex"
 ├── Facilities: ["Pool", "Gym"]
 └── Staff
     ├── ID: "T001" (Name: Mike)
     └── ID: "T002" (Name: Sarah)</pre>
-            <p><strong>Challenge:</strong> Write the JSON Schema to ensure "Facilities" is always an Array and ID is a String.</p>
-        </details>
-
-    </div>
-    
-    <div class="window-footer">
-        <button aria-label="Close" onclick="window.location.href='index.html'">X</button>        </div>
+                <p><strong>Challenge:</strong> Write the JSON Schema to ensure "Facilities" is always an Array and ID is a String.</p>
+            </details>
+        </div>
     </div>
 </div>
 
@@ -175,11 +172,11 @@ Sports Center
 
         try {
             const parsed = JSON.parse(input);
-            output.value = JSON.stringify(parsed, null, 4); // 4 spaces indentation
+            output.value = JSON.stringify(parsed, null, 4);
             status.className = "status-bar valid";
             status.innerText = "✓ Valid JSON";
         } catch (e) {
-            output.value = ""; // Clear output on error
+            output.value = "";
             status.className = "status-bar invalid";
             status.innerText = "❌ " + e.message;
         }
@@ -193,15 +190,12 @@ Sports Center
     };
 
     function switchTab(format) {
-        // Update Buttons
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
         
-        // Update Code
         document.getElementById('compareCode').innerText = dataFormats[format];
     }
 
-    // Run validation once on load to show the error in the example
     window.onload = validateJSON;
 </script>
 </body>

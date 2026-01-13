@@ -4,104 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Functions Interactive Notes</title>
+    <link rel="stylesheet" href="styles/notes.css">
     <style>
-        /* Interactive Tools */
-        .interactive-box { background: #d4d4d4; border: 2px inset white; padding: 10px; margin-top: 10px; }
-        .btn { cursor: pointer; background: var(--win-gray); border: 2px outset white; padding: 2px 10px; font-weight: bold; margin-top: 5px; }
-        .btn:active { border-style: inset; }
-        input { font-family: monospace; padding: 2px; }
-        .output { background: black; color: lime; padding: 5px; font-family: monospace; margin-top: 5px; min-height: 20px; }
+        .interactive-box { 
+            background: #d4d4d4; 
+            border: 2px inset white; 
+            padding: 10px; 
+            margin-top: 10px; 
+        }
+        .output { 
+            background: black; 
+            color: lime; 
+            padding: 5px; 
+            font-family: monospace; 
+            margin-top: 5px; 
+            min-height: 20px; 
+        }
     </style>
 </head>
-<body>
-<div class="window" id="mainWindow">
+<body style="background-color: var(--desktop-bg);">
+<div class="window" style="position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px; width: auto; height: auto; resize: none;">
     <div class="title-bar">
         <div class="title-bar-text">JavaScript Functions</div>
         <div class="title-bar-controls">
-            <button class="btn" onclick="closeWindow()" style="margin:0; width: 20px;">X</button>
+            <button onclick="window.location.href='index.html'">X</button>
         </div>
     </div>
     
     <div class="window-body">
-        
-        <details open>
-            <summary><strong>01 Defining Functions</strong></summary>
-            <p>Functions are reusable blocks of code.</p>
-            
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <div style="flex:1;">
-                    <strong>Declaration:</strong>
-                    <pre>function sayHi(name) {
+        <div class="content-area">
+            <details open>
+                <summary><strong>01 Defining Functions</strong></summary>
+                <p>Functions are reusable blocks of code.</p>
+                
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <div style="flex:1;">
+                        <strong>Declaration:</strong>
+                        <pre>function sayHi(name) {
   return "Hi " + name;
 }</pre>
-                    <p><em>Hoisted (can be called before definition).</em></p>
-                </div>
-                <div style="flex:1;">
-                    <strong>Expression:</strong>
-                    <pre>const sayHi = function(name) {
+                        <p><em>Hoisted (can be called before definition).</em></p>
+                    </div>
+                    <div style="flex:1;">
+                        <strong>Expression:</strong>
+                        <pre>const sayHi = function(name) {
   return "Hi " + name;
 };</pre>
-                    <p><em>Not hoisted.</em></p>
+                        <p><em>Not hoisted.</em></p>
+                    </div>
                 </div>
-            </div>
-        </details>
+            </details>
 
-        <details>
-            <summary><strong>02 Arrow Functions (ES6)</strong></summary>
-            <p>A concise syntax for writing function expressions.</p>
-            
-            <div class="interactive-box">
-                <strong>Arrow Converter:</strong>
-                <p>Type a standard function logic below to see the arrow equivalent.</p>
-                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;">
-                    <code>function(</code><input type="text" id="params" value="a, b" style="width:50px;"><code>) { return </code><input type="text" id="logic" value="a + b" style="width:100px;"><code>; }</code>
+            <details>
+                <summary><strong>02 Arrow Functions (ES6)</strong></summary>
+                <p>A concise syntax for writing function expressions.</p>
+                
+                <div class="interactive-box">
+                    <strong>Arrow Converter:</strong>
+                    <p>Type a standard function logic below to see the arrow equivalent.</p>
+                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;">
+                        <code>function(</code><input type="text" id="params" value="a, b" style="width:50px; padding: 3px;"><code>) { return </code><input type="text" id="logic" value="a + b" style="width:100px; padding: 3px;"><code>; }</code>
+                    </div>
+                    <button class="win98-btn" onclick="convertArrow()">Convert</button>
+                    <div class="output" id="arrowOutput">const func = (a, b) => a + b;</div>
                 </div>
-                <button class="btn" onclick="convertArrow()">Convert</button>
-                <div class="output" id="arrowOutput" style="background: white; color: blue;">const func = (a, b) => a + b;</div>
-            </div>
-            
-            <p><strong>Notes:</strong></p>
-            <ul>
-                <li>Implicit return if no curly braces <code>{}</code> used.</li>
-                <li>Does not have its own <code>this</code> context.</li>
-            </ul>
-        </details>
+                
+                <p><strong>Notes:</strong></p>
+                <ul>
+                    <li>Implicit return if no curly braces <code>{}</code> used.</li>
+                    <li>Does not have its own <code>this</code> context.</li>
+                </ul>
+            </details>
 
-        <details>
-            <summary><strong>03 Parameters & Defaults</strong></summary>
-            <p>You can set default values for parameters to avoid <code>undefined</code> errors.</p>
-            <pre>function greet(name = "Guest") {
+            <details>
+                <summary><strong>03 Parameters & Defaults</strong></summary>
+                <p>You can set default values for parameters to avoid <code>undefined</code> errors.</p>
+                <pre>function greet(name = "Guest") {
   return `Hello ${name}`;
 }
 greet(); // "Hello Guest"</pre>
-        </details>
+            </details>
 
-        <details>
-            <summary><strong>04 Scope Visualization</strong></summary>
-            <p>Variables defined inside a function are <strong>Local</strong>. Variables outside are <strong>Global</strong>.</p>
-            
-            <div class="interactive-box">
-                <button class="btn" onclick="runScopeDemo()">Run Scope Test</button>
-                <div id="scopeConsole" class="output">> Waiting...</div>
-            </div>
-        </details>
-
-    </div>
-    <div class="window-footer">
-        <button class="btn" onclick="closeWindow()">Close</button>
+            <details>
+                <summary><strong>04 Scope Visualization</strong></summary>
+                <p>Variables defined inside a function are <strong>Local</strong>. Variables outside are <strong>Global</strong>.</p>
+                
+                <div class="interactive-box">
+                    <button class="win98-btn" onclick="runScopeDemo()">Run Scope Test</button>
+                    <div id="scopeConsole" class="output">> Waiting...</div>
+                </div>
+            </details>
+        </div>
     </div>
 </div>
 
 <script>
-    function closeWindow() {
-        document.getElementById('mainWindow').style.display = 'none';
-    }
-
     function convertArrow() {
         const params = document.getElementById('params').value;
         const logic = document.getElementById('logic').value;
         
-        // Simple heuristic for visualization
         const result = `const myFunc = (${params}) => ${logic};`;
         document.getElementById('arrowOutput').innerText = result;
     }
