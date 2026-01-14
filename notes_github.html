@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Interactive Guide</title>
+    <style>
+        :root {
+            --win-gray: #c0c0c0;
+            --win-dark: #808080;
+            --desktop-bg: #008080; /* Classic Teal */
+            --term-bg: #1e1e1e;
+            --term-green: #00ff00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--desktop-bg);
+            margin: 0;
+            overflow: hidden; /* Prevent body scroll, use window scroll */
+        }
+
+        /* Window Styling */
+        .window {
+            background: var(--win-gray);
+            border: 2px outset #fff;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            position: fixed; top: 20px; left: 20px; right: 20px; bottom: 20px;
+            display: flex; flex-direction: column;
+        }
+
+        .title-bar {
+            background: navy;
+            color: white;
+            padding: 3px 5px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: bold; font-size: 14px;
+        }
+
+        .title-bar button {
+            background: var(--win-gray);
+            border: 1px outset #fff;
+            font-weight: bold; width: 20px; height: 18px;
+            line-height: 14px; cursor: pointer;
+        }
+
+        .window-body {
+            flex: 1; overflow-y: auto; padding: 10px;
+        }
+
+        /* Content Areas */
+        details { margin-bottom: 10px; }
+        summary { cursor: pointer; margin-bottom: 5px; user-select: none; }
+        summary:focus { outline: 1px dotted black; }
+        
+        .content-area p, .content-area li { font-size: 14px; line-height: 1.4; }
+        
+        code { background: #eee; padding: 2px 4px; border: 1px solid #999; font-family: monospace; }
+        pre.dark-code { 
+            background: var(--term-bg); color: #fff; 
+            padding: 10px; border: 2px inset white; overflow-x: auto; 
+        }
+
+        /* Simulator Tool */
+        .sim-panel { display: flex; gap: 10px; margin-top: 10px; height: 300px; }
+        .sim-controls { flex: 0 0 150px; display: flex; flex-direction: column; gap: 5px; }
+        .sim-display { 
+            flex: 1; background: #000; border: 2px inset white; 
+            padding: 10px; font-family: monospace; color: var(--term-green);
+            overflow-y: auto; display: flex; flex-direction: column;
+        }
+        
+        .sim-btn {
+            padding: 8px; text-align: left; cursor: pointer;
+            border: 2px outset white; background: var(--win-gray); font-weight: bold; font-family: monospace;
+        }
+        .sim-btn:active { border-style: inset; }
+        .sim-btn:disabled { color: #888; cursor: not-allowed; }
+
+        .visualizer {
+            display: flex; justify-content: space-between; margin-top: auto; padding-top: 10px; border-top: 1px dashed #555;
+        }
+        .vis-box {
+            width: 30%; height: 60px; border: 1px solid #555; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; text-align: center; color: #aaa; transition: 0.3s;
+        }
+        .vis-box.active { border-color: var(--term-green); color: var(--term-green); background: #002200; box-shadow: 0 0 5px var(--term-green); }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 2px; margin-bottom: -2px; z-index: 10; margin-top: 10px; }
+        .tab-btn {
+            background: var(--win-gray); border: 1px solid var(--win-dark);
+            border-bottom: none; padding: 5px 15px; cursor: pointer;
+            border-radius: 5px 5px 0 0; font-weight: bold; font-size: 12px;
+        }
+        .tab-btn.active { background: #fff; border-bottom: 2px solid #fff; margin-bottom: -2px; padding-bottom: 7px; }
+        .tab-content { background: #fff; border: 2px solid var(--win-dark); padding: 15px; min-height: 100px; }
+
+        /* Flowchart Table */
+        table.flow-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        table.flow-table th { background: navy; color: white; padding: 5px; text-align: left; }
+        table.flow-table td { border: 1px solid #999; padding: 5px; background: white; }
+
+        .branch-viz {
+            font-family: monospace; line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <div class="title-bar">
+        <div class="title-bar-text">GitHub Guide.exe</div>
+        <div class="title-bar-controls">
+            <button onclick="window.location.reload()">X</button>
+        </div>
+    </div>
+    
+    <div class="window-body">
+        <div class="content-area">
+            
+            <details open>
+                <summary><strong>01. The Git Workflow Simulator</strong></summary>
+                <p>Click the buttons on the left to simulate the lifecycle of code from your computer to GitHub.</p>
+                
+                <div class="sim-panel">
+                    <div class="sim-controls">
+                        <button class="sim-btn" id="btnInit" onclick="runSim('init')">1. git init</button>
+                        <button class="sim-btn" id="btnAdd" onclick="runSim('add')" disabled>2. git add .</button>
+                        <button class="sim-btn" id="btnCommit" onclick="runSim('commit')" disabled>3. git commit</button>
+                        <button class="sim-btn" id="btnPush" onclick="runSim('push')" disabled>4. git push</button>
+                        <button class="sim-btn" onclick="resetSim()" style="margin-top:auto; color:maroon;">Reset</button>
+                    </div>
+                    
+                    <div class="sim-display" id="terminalOutput">
+                        <div>user@computer:~/project$ _</div>
+                        <div class="visualizer">
+                            <div class="vis-box" id="vis-local">Your Computer<br>(Working Dir)</div>
+                            <div class="vis-box" id="vis-stage">Staging Area<br>(Boxed)</div>
+                            <div class="vis-box" id="vis-remote">GitHub Cloud<br>(Remote)</div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>02. Core Concepts: Git vs. GitHub</strong></summary>
+                <p>Many people confuse the two. Here is the distinction:</p>
+                <table class="flow-table">
+                    <tr>
+                        <th style="width: 50%;">Git (The Engine)</th>
+                        <th>GitHub (The Host)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Installed on your local computer.</li>
+                                <li>Tracks changes in files (Version Control).</li>
+                                <li>Works offline.</li>
+                                <li>Command line tool (CLI).</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>A website (Cloud Service).</li>
+                                <li>Stores your Git repositories online.</li>
+                                <li>Adds collaboration (Pull Requests, Issues).</li>
+                                <li>Visual Interface (GUI).</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </details>
+
+            <details>
+                <summary><strong>03. Branching & Merging</strong></summary>
+                <p><strong>Branching</strong> lets you work on a feature without breaking the main code. Click tabs to understand the flow.</p>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchBranchTab('main')">1. Main Line</button>
+                    <button class="tab-btn" onclick="switchBranchTab('feature')">2. Feature Branch</button>
+                    <button class="tab-btn" onclick="switchBranchTab('merge')">3. Pull Request</button>
+                </div>
+                <div class="tab-content">
+                    <pre class="dark-code" id="branchViz">
+(A)---(B)---(C)  ← main (Production Ready)
+                    </pre>
+                    <p id="branchDesc" style="margin-top:10px; font-style: italic;">The main branch contains the stable code deployed to users.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>04. Dictionary (Cheat Sheet)</strong></summary>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="border: 1px inset white; background: #fff; padding: 5px;">
+                        <strong>Repository (Repo)</strong><br>
+                        The folder containing your project and history.
+                    </div>
+                    <div style="border: 1px inset white; background: #fff; padding: 5px;">
+                        <strong>Commit</strong><br>
+                        A "Save Point". A snapshot of your code at a specific time.
+                    </div>
+                    <div style="border: 1px inset white; background: #fff; padding: 5px;">
+                        <strong>Pull Request (PR)</strong><br>
+                        Asking to merge your branch into the main branch. This is where code review happens.
+                    </div>
+                    <div style="border: 1px inset white; background: #fff; padding: 5px;">
+                        <strong>Fork</strong><br>
+                        Copying someone else's repo to your account so you can modify it.
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>05. README.md Magic</strong></summary>
+                <p>GitHub uses <strong>Markdown</strong> to format text. It's crucial for writing documentation.</p>
+                <table class="flow-table">
+                    <tr style="background:#ccc; color:black;"><th>You Type</th><th>You Get</th></tr>
+                    <tr><td><code># Header</code></td><td><h1 style="margin:0; font-size:1.2em">Header</h1></td></tr>
+                    <tr><td><code>**Bold**</code></td><td><strong>Bold</strong></td></tr>
+                    <tr><td><code>[Link](url)</code></td><td><a href="#">Link</a></td></tr>
+                    <tr><td><code>- Item 1</code></td><td>• Item 1</td></tr>
+                    <tr><td><code>`code`</code></td><td><code>code</code></td></tr>
+                </table>
+            </details>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. Simulator Logic ---
+    let simStep = 0;
+    const term = document.getElementById('terminalOutput');
+    const visualizers = {
+        local: document.getElementById('vis-local'),
+        stage: document.getElementById('vis-stage'),
+        remote: document.getElementById('vis-remote')
+    };
+
+    function log(msg, color="#fff") {
+        const line = document.createElement('div');
+        line.style.color = color;
+        line.innerText = msg;
+        // Insert before the visualizer div
+        term.insertBefore(line, term.lastElementChild);
+        term.scrollTop = term.scrollHeight; // Auto scroll
+    }
+
+    function runSim(action) {
+        if(action === 'init') {
+            log("user@computer:~/project$ git init");
+            log("Initialized empty Git repository in /project/.git/", "#aaa");
+            visualizers.local.classList.add('active');
+            visualizers.local.innerText = "Files Tracked\n(Red)";
+            document.getElementById('btnInit').disabled = true;
+            document.getElementById('btnAdd').disabled = false;
+        }
+        else if(action === 'add') {
+            log("user@computer:~/project$ git add .");
+            log("Files added to staging area.", "#aaa");
+            visualizers.stage.classList.add('active');
+            visualizers.stage.innerText = "Ready to Commit\n(Green)";
+            visualizers.local.innerText = "Working Dir\n(Clean)";
+            visualizers.local.classList.remove('active');
+            document.getElementById('btnAdd').disabled = true;
+            document.getElementById('btnCommit').disabled = false;
+        }
+        else if(action === 'commit') {
+            log('user@computer:~/project$ git commit -m "First commit"');
+            log("[main (root-commit) 28a1b2] First commit", "#aaa");
+            log(" 3 files changed, 12 insertions(+)", "#aaa");
+            visualizers.stage.classList.remove('active');
+            visualizers.stage.innerText = "Staging Area\n(Empty)";
+            document.getElementById('btnCommit').disabled = true;
+            document.getElementById('btnPush').disabled = false;
+        }
+        else if(action === 'push') {
+            log("user@computer:~/project$ git push origin main");
+            log("Enumerating objects: 3, done.", "#aaa");
+            log("To https://github.com/user/repo.git", "#aaa");
+            log(" * [new branch]      main -> main", "#aaa");
+            visualizers.remote.classList.add('active');
+            visualizers.remote.innerText = "Code on GitHub\n(Synced)";
+            document.getElementById('btnPush').disabled = true;
+            log("SUCCESS: Code is now online!", "#00ff00");
+        }
+    }
+
+    function resetSim() {
+        // Clear terminal except first line and visualizer
+        while(term.children.length > 2) {
+            term.removeChild(term.firstElementChild.nextSibling);
+        }
+        // Reset Visuals
+        Object.values(visualizers).forEach(v => {
+            v.className = 'vis-box';
+        });
+        visualizers.local.innerText = "Your Computer\n(Working Dir)";
+        visualizers.stage.innerText = "Staging Area\n(Boxed)";
+        visualizers.remote.innerText = "GitHub Cloud\n(Remote)";
+
+        // Reset Buttons
+        document.getElementById('btnInit').disabled = false;
+        document.getElementById('btnAdd').disabled = true;
+        document.getElementById('btnCommit').disabled = true;
+        document.getElementById('btnPush').disabled = true;
+    }
+
+    // --- 2. Branch Tab Logic ---
+    const branchData = {
+        main: {
+            viz: `(A)---(B)---(C)  ← main`,
+            desc: "This is the history of the main codebase. It proceeds in a straight line."
+        },
+        feature: {
+            viz: `(A)---(B)---(C)  ← main
+             \\
+              (D)---(E)  ← feature-login`,
+            desc: "You create a new branch 'feature-login'. You make commits (D, E) here. The main branch is unaffected."
+        },
+        merge: {
+            viz: `(A)---(B)---(C)-------(F)  ← main
+             \\           /
+              (D)---(E)-'    (Merge Commit)`,
+            desc: "A Pull Request (PR) merges the changes from the feature branch back into main."
+        }
+    };
+
+    function switchBranchTab(key) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        document.getElementById('branchViz').innerText = branchData[key].viz;
+        document.getElementById('branchDesc').innerText = branchData[key].desc;
+    }
+</script>
+
+</body>
+</html>
